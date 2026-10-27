@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="map-title">
+<title id="map-title">示例城市线网图</title>
+<desc>Schematic network; positions do not imply geographic scale. Editable vector paths and text.</desc>
+<rect width="1000" height="700" fill="#ffffff"/>
+<g font-family="Noto Sans CJK SC, Microsoft YaHei, sans-serif" fill="#243746">
+<g id="regions">
+</g><g id="routes">
+<g data-route="red" data-mode="metro"><title>红线 / Red</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M140 310 L390 310 L650 310" fill="none" stroke="#D8443C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="blue" data-mode="regional"><title>蓝线 / Blue</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M390 150 L390 310 L390 412 A28 28 0 0 0 418 440 L622 440 A28 28 0 0 1 650 468 L650 530" fill="none" stroke="#247BA0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+</g><g id="stations">
+<g data-station="west" data-status="open" transform="translate(140 310)"><title>西园</title>
+<circle r="5.5" fill="#ffffff" stroke="#D8443C" stroke-width="2.5"/>
+</g>
+<g data-station="central" data-status="open" transform="translate(390 310)"><title>中央广场</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#D8443C"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#247BA0"/>
+</g>
+<g data-station="east" data-status="open" transform="translate(650 310)"><title>东门</title>
+<circle r="5.5" fill="#ffffff" stroke="#D8443C" stroke-width="2.5"/>
+</g>
+<g data-station="north" data-status="open" transform="translate(390 150)"><title>北城</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+<g data-station="harbor" data-status="open" transform="translate(650 530)"><title>港湾</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+</g><g id="labels">
+<text data-label="west" x="140" y="285" text-anchor="middle" font-size="17"><tspan x="140">西园</tspan>
+<tspan x="140" dy="16" font-size="12">West Park</tspan>
+</text>
+<text data-label="central" x="410" y="282" text-anchor="start" font-size="17"><tspan x="410">中央广场</tspan>
+<tspan x="410" dy="16" font-size="12">Central Square</tspan>
+</text>
+<text data-label="east" x="650" y="285" text-anchor="middle" font-size="17"><tspan x="650">东门</tspan>
+<tspan x="650" dy="16" font-size="12">East Gate</tspan>
+</text>
+<text data-label="north" x="410" y="146" text-anchor="start" font-size="17"><tspan x="410">北城</tspan>
+<tspan x="410" dy="16" font-size="12">North Town</tspan>
+</text>
+<text data-label="harbor" x="670" y="530" text-anchor="start" font-size="17"><tspan x="670">港湾</tspan>
+<tspan x="670" dy="16" font-size="12">Harbor</tspan>
+</text>
+</g><g id="heading">
+<text x="32" y="48" font-size="30" font-weight="700">示例城市线网图</text>
+<text x="32" y="77" font-size="16">Sample City Network · fictional data</text>
+</g>
+<g id="legend" transform="translate(740 130)"><rect width="220" height="132" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="16" y="27" font-size="17">图例 / Legend</text>
+<path d="M16 50 H62" fill="none" stroke="#D8443C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="55" font-size="14">红线 / Red</text>
+<path d="M16 90 H62" fill="none" stroke="#247BA0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="95" font-size="14">蓝线 / Blue</text>
+</g>
+<g id="annotations">
+<text x="32" y="660" font-size="14" text-anchor="start">虚构示例；示意位置不代表实际地理比例。</text>
+</g></g></svg>

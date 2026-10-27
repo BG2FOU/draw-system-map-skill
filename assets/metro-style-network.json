@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "title": "示例市地铁线网图",
+  "subtitle": "Metro style · interchanges and underground / surface / elevated sections",
+  "canvas": { "width": 1360, "height": 900, "background": "#ffffff" },
+  "style": { "route_width": 9, "corner_radius": 28, "interchange_style": "arrows", "interchange_radius": 12.5 },
+  "stations": [
+    { "id": "west", "name": "西门", "secondary_name": "West Gate", "point": [120, 300], "label": { "offset": [0, -26], "anchor": "middle" } },
+    { "id": "central", "name": "中央广场", "secondary_name": "Central Square", "point": [420, 300], "label": { "offset": [-24, -32], "anchor": "end" }, "transfer_order": ["red", "green", "blue"] },
+    { "id": "east", "name": "东园", "secondary_name": "East Park", "point": [760, 300], "label": { "offset": [0, -26], "anchor": "middle" } },
+    { "id": "north", "name": "北城", "secondary_name": "North Town", "point": [420, 140], "label": { "offset": [22, 0] } },
+    { "id": "south", "name": "南街", "secondary_name": "South Street", "point": [570, 540], "label": { "offset": [0, 30], "anchor": "middle" } },
+    { "id": "junction", "name": "滨江", "secondary_name": "Riverside", "point": [760, 540], "label": { "offset": [24, -24] }, "transfer_order": ["blue", "green"] },
+    { "id": "end", "name": "会展中心", "secondary_name": "Exhibition Center", "point": [950, 540], "label": { "offset": [0, 32], "anchor": "middle" } },
+    { "id": "reserved", "name": "远景站", "secondary_name": "Future Station", "point": [760, 720], "status": "reserved", "label": { "offset": [22, 0] } }
+  ],
+  "routes": [
+    { "id": "red", "name": "1 号线 / Line 1", "color": "#D8443C", "structure": "underground", "segments": [{ "points": ["west", "central", "east"] }] },
+    { "id": "blue", "name": "2 号线 / Line 2", "color": "#247BA0", "segments": [
+      { "points": ["north", "central", [420, 380]], "structure": "underground" },
+      { "points": [[420, 380], [420, 430], [760, 430], "junction"], "structure": "surface" },
+      { "points": ["junction", "reserved"], "structure": "elevated" }
+    ] },
+    { "id": "green", "name": "3 号线 / Line 3", "color": "#238B57", "structure": "underground", "segments": [
+      { "points": ["central", [570, 450], "south", "junction", "end"] }
+    ] }
+  ],
+  "legend": {
+    "point": [1020, 140], "width": 310, "title": "图例 / Legend",
+    "items": [
+      { "name": "地下段", "structure": "underground" },
+      { "name": "地面 / 高架段", "structure": "elevated" },
+      { "name": "普通站", "symbol": "station" },
+      { "name": "两线换乘站", "symbol": "interchange", "colors": ["#247BA0", "#238B57"] },
+      { "name": "三线换乘站", "symbol": "interchange", "colors": ["#D8443C", "#238B57", "#247BA0"] },
+      { "name": "预留 / 未开放站", "symbol": "reserved" }
+    ]
+  },
+  "annotations": [
+    { "point": [32, 820], "text": "样式示例：结构转换可在站间发生，不增加车站；未开放站不改变其相邻区段的敷设方式。" },
+    { "point": [32, 850], "text": "虚构数据；地面/高架用空心线是本套默认约定，可按目标网络覆盖。" }
+  ]
+}

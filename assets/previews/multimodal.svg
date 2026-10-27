@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="map-title">
+<title id="map-title">Port Aurora connections</title>
+<desc>Schematic network; positions do not imply geographic scale. Editable vector paths and text.</desc>
+<rect width="1200" height="800" fill="#ffffff"/>
+<g font-family="DejaVu Sans, sans-serif" fill="#243746">
+<g id="regions">
+<polygon points="0 590 700 590 820 470 1200 470 1200 800 0 800" fill="#DDEFF6"/>
+</g><g id="routes">
+<g data-route="regional" data-mode="regional rail"><title>Regional rail</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M150 180 L150 308 A32 32 0 0 0 182 340 L400 340 L650 340" fill="none" stroke="#A53770" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="unspecified"><path d="M400 340 L400 212 A32 32 0 0 1 432 180 L650 180" fill="none" stroke="#A53770" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="shuttle" data-mode="shuttle"><title>Campus shuttle</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M400 340 L440.6 275.04 A32 32 0 0 1 467.7359 260 L708 260 A32 32 0 0 1 740 292 L740 308 A32 32 0 0 1 708 340 L650 340 L609.1441 413.5406 A32 32 0 0 1 581.1711 430 L468.8289 430 A32 32 0 0 1 440.8559 413.5406 L400 340 Z" fill="none" stroke="#238B57" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"><g data-segment="0" data-structure="unspecified"><path d="M400 340 L440.6 275.04 A32 32 0 0 1 467.7359 260 L708 260 A32 32 0 0 1 740 292 L740 308 A32 32 0 0 1 708 340 L650 340 L609.1441 413.5406 A32 32 0 0 1 581.1711 430 L468.8289 430 A32 32 0 0 1 440.8559 413.5406 L400 340 Z" fill="none" stroke="#ffffff" stroke-width="4.32" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+<g data-route="ferry" data-mode="water transit"><title>Ferry</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M170 560 L170 598.5 A31.5 31.5 0 0 0 201.5 630 L688.5 630 A31.5 31.5 0 0 0 720 598.5 L720 560 L840.6274 680.6274 A32 32 0 0 0 863.2548 690 L980 690" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="12 8"/></g></g><g data-track-layer="core"></g></g>
+</g><g id="stations">
+<g data-station="airport" data-status="open" transform="translate(150 180)"><title>Airport</title>
+<circle r="5.5" fill="#ffffff" stroke="#A53770" stroke-width="2.5"/>
+</g>
+<g data-station="exchange" data-status="open" transform="translate(400 340)"><title>Exchange</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#A53770" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#A53770"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#238B57"/>
+</g>
+<g data-station="museum" data-status="open" transform="translate(650 180)"><title>Museum</title>
+<circle r="5.5" fill="#ffffff" stroke="#A53770" stroke-width="2.5"/>
+</g>
+<g data-station="university" data-status="open" transform="translate(650 340)"><title>University</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#A53770" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#A53770"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#238B57"/>
+</g>
+<g data-station="west-pier" data-status="open" transform="translate(170 560)"><title>West Pier</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+<g data-station="east-pier" data-status="open" transform="translate(720 560)"><title>East Pier</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+<g data-station="island" data-status="open" transform="translate(980 690)"><title>Island</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+</g><g id="labels">
+<text data-label="airport" x="150" y="160" text-anchor="middle" font-size="17"><tspan x="150">Airport</tspan>
+</text>
+<text data-label="exchange" x="380" y="372" text-anchor="end" font-size="17"><tspan x="380">Exchange</tspan>
+</text>
+<text data-label="museum" x="650" y="160" text-anchor="middle" font-size="17"><tspan x="650">Museum</tspan>
+</text>
+<text data-label="university" x="650" y="316" text-anchor="middle" font-size="17"><tspan x="650">University</tspan>
+</text>
+<text data-label="west-pier" x="155" y="590" text-anchor="end" font-size="17"><tspan x="155">West Pier</tspan>
+</text>
+<text data-label="east-pier" x="740" y="540" text-anchor="start" font-size="17"><tspan x="740">East Pier</tspan>
+</text>
+<text data-label="island" x="1000" y="690" text-anchor="start" font-size="17"><tspan x="1000">Island</tspan>
+</text>
+</g><g id="heading">
+<text x="32" y="48" font-size="30" font-weight="700">Port Aurora connections</text>
+<text x="32" y="77" font-size="16">Fictional example · rail, shuttle and ferry</text>
+</g>
+<g id="legend" transform="translate(880 130)"><rect width="280" height="172" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="16" y="27" font-size="17">Legend</text>
+<path d="M16 50 H62" fill="none" stroke="#A53770" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="55" font-size="14">Regional rail</text>
+<path d="M16 90 H62" fill="none" stroke="#238B57" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 90 H62" fill="none" stroke="#ffffff" stroke-width="4.32" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="95" font-size="14">Campus shuttle</text>
+<path d="M16 130 H62" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<text x="76" y="135" font-size="14">Ferry</text>
+</g>
+<g id="annotations">
+<text x="32" y="760" font-size="14" text-anchor="start">Styles are chosen for this illustration; no universal operating status is implied.</text>
+</g></g></svg>

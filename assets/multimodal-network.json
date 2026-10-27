@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "title": "Port Aurora connections",
+  "subtitle": "Fictional example · rail, shuttle and ferry",
+  "canvas": { "width": 1200, "height": 800, "background": "#ffffff" },
+  "style": { "route_width": 9, "corner_radius": 32, "font_family": "DejaVu Sans, sans-serif" },
+  "regions": [{ "fill": "#DDEFF6", "points": [[0, 590], [700, 590], [820, 470], [1200, 470], [1200, 800], [0, 800]] }],
+  "stations": [
+    { "id": "airport", "name": "Airport", "point": [150, 180], "label": { "offset": [0, -20], "anchor": "middle" } },
+    { "id": "exchange", "name": "Exchange", "point": [400, 340], "label": { "offset": [-20, 32], "anchor": "end" } },
+    { "id": "museum", "name": "Museum", "point": [650, 180], "label": { "offset": [0, -20], "anchor": "middle" } },
+    { "id": "university", "name": "University", "point": [650, 340], "label": { "offset": [0, -24], "anchor": "middle" } },
+    { "id": "west-pier", "name": "West Pier", "point": [170, 560], "label": { "offset": [-15, 30], "anchor": "end" } },
+    { "id": "east-pier", "name": "East Pier", "point": [720, 560], "label": { "offset": [20, -20] } },
+    { "id": "island", "name": "Island", "point": [980, 690], "label": { "offset": [20, 0] } }
+  ],
+  "routes": [
+    { "id": "regional", "name": "Regional rail", "mode": "regional rail", "color": "#A53770", "segments": [
+      { "points": ["airport", [150, 340], "exchange", "university"] },
+      { "points": ["exchange", [400, 180], "museum"] }
+    ] },
+    { "id": "shuttle", "name": "Campus shuttle", "mode": "shuttle", "color": "#238B57", "pattern": "hollow", "segments": [
+      { "points": ["exchange", [450, 260], [740, 260], [740, 340], "university", [600, 430], [450, 430]], "closed": true }
+    ] },
+    { "id": "ferry", "name": "Ferry", "mode": "water transit", "color": "#247BA0", "pattern": "dashed", "segments": [
+      { "points": ["west-pier", [170, 630], [720, 630], "east-pier", [850, 690], "island"] }
+    ] }
+  ],
+  "legend": { "point": [880, 130], "width": 280 },
+  "annotations": [{ "point": [32, 760], "text": "Styles are chosen for this illustration; no universal operating status is implied." }]
+}

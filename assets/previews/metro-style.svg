@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="900" viewBox="0 0 1360 900" role="img" aria-labelledby="map-title">
+<title id="map-title">示例市地铁线网图</title>
+<desc>Schematic network; positions do not imply geographic scale. Editable vector paths and text.</desc>
+<rect width="1360" height="900" fill="#ffffff"/>
+<g font-family="Noto Sans CJK SC, Microsoft YaHei, sans-serif" fill="#243746">
+<g id="regions">
+</g><g id="routes">
+<g data-route="red" data-mode=""><title>1 号线 / Line 1</title><g data-track-layer="outline"><g data-segment="0" data-structure="underground"><path d="M120 300 L420 300 L760 300" fill="none" stroke="#D8443C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="blue" data-mode=""><title>2 号线 / Line 2</title><g data-track-layer="outline"><g data-segment="0" data-structure="underground"><path d="M420 140 L420 300 L420 380" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="surface"><path d="M420 380 L420 407.5 A22.5 22.5 0 0 0 442.5 430 L732 430 A28 28 0 0 1 760 458 L760 540" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="2" data-structure="elevated"><path d="M760 540 L760 720" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"><g data-segment="1" data-structure="surface"><path d="M420 380 L420 407.5 A22.5 22.5 0 0 0 442.5 430 L732 430 A28 28 0 0 1 760 458 L760 540" fill="none" stroke="#ffffff" stroke-width="4.32" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="2" data-structure="elevated"><path d="M760 540 L760 720" fill="none" stroke="#ffffff" stroke-width="4.32" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+<g data-route="green" data-mode=""><title>3 号线 / Line 3</title><g data-track-layer="outline"><g data-segment="0" data-structure="underground"><path d="M420 300 L561.799 441.799 A28 28 0 0 1 570 461.598 L570 540 L760 540 L950 540" fill="none" stroke="#238B57" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+</g><g id="stations">
+<g data-station="west" data-status="open" transform="translate(120 300)"><title>西门</title>
+<circle r="5.5" fill="#ffffff" stroke="#D8443C" stroke-width="2.5"/>
+</g>
+<g data-station="central" data-status="open" transform="translate(420 300)"><title>中央广场</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M8.3641 -9.2893 A12.5 12.5 0 0 0 -8.3641 -9.2893" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-10.9651 -6.9474 L-8.4767 -13.8977 L-3.7927 -8.6957 Z" fill="#D8443C"/><path class="transfer-arrow" d="M3.8627 11.8882 A12.5 12.5 0 0 0 12.2268 -2.5989" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M11.4992 -6.0224 L16.2741 -0.3921 L9.4271 1.0632 Z" fill="#238B57"/><path class="transfer-arrow" d="M-12.2268 -2.5989 A12.5 12.5 0 0 0 -3.8627 11.8882" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-0.534 12.9698 L-7.7974 14.2899 L-5.6343 7.6325 Z" fill="#247BA0"/>
+</g>
+<g data-station="east" data-status="open" transform="translate(760 300)"><title>东园</title>
+<circle r="5.5" fill="#ffffff" stroke="#D8443C" stroke-width="2.5"/>
+</g>
+<g data-station="north" data-status="open" transform="translate(420 140)"><title>北城</title>
+<circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
+</g>
+<g data-station="south" data-status="open" transform="translate(570 540)"><title>南街</title>
+<circle r="5.5" fill="#ffffff" stroke="#238B57" stroke-width="2.5"/>
+</g>
+<g data-station="junction" data-status="open" transform="translate(760 540)"><title>滨江</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#247BA0"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#238B57"/>
+</g>
+<g data-station="end" data-status="open" transform="translate(950 540)"><title>会展中心</title>
+<circle r="5.5" fill="#ffffff" stroke="#238B57" stroke-width="2.5"/>
+</g>
+<g data-station="reserved" data-status="reserved" transform="translate(760 720)"><title>远景站</title>
+<circle r="5.5" fill="#ffffff" stroke="#858b91" stroke-width="2.5" stroke-dasharray="3 2"/>
+</g>
+</g><g id="labels">
+<text data-label="west" x="120" y="274" text-anchor="middle" font-size="17"><tspan x="120">西门</tspan>
+<tspan x="120" dy="16" font-size="12">West Gate</tspan>
+</text>
+<text data-label="central" x="396" y="268" text-anchor="end" font-size="17"><tspan x="396">中央广场</tspan>
+<tspan x="396" dy="16" font-size="12">Central Square</tspan>
+</text>
+<text data-label="east" x="760" y="274" text-anchor="middle" font-size="17"><tspan x="760">东园</tspan>
+<tspan x="760" dy="16" font-size="12">East Park</tspan>
+</text>
+<text data-label="north" x="442" y="140" text-anchor="start" font-size="17"><tspan x="442">北城</tspan>
+<tspan x="442" dy="16" font-size="12">North Town</tspan>
+</text>
+<text data-label="south" x="570" y="570" text-anchor="middle" font-size="17"><tspan x="570">南街</tspan>
+<tspan x="570" dy="16" font-size="12">South Street</tspan>
+</text>
+<text data-label="junction" x="784" y="516" text-anchor="start" font-size="17"><tspan x="784">滨江</tspan>
+<tspan x="784" dy="16" font-size="12">Riverside</tspan>
+</text>
+<text data-label="end" x="950" y="572" text-anchor="middle" font-size="17"><tspan x="950">会展中心</tspan>
+<tspan x="950" dy="16" font-size="12">Exhibition Center</tspan>
+</text>
+<text data-label="reserved" x="782" y="720" text-anchor="start" font-size="17" fill="#858b91" opacity="0.65"><tspan x="782">远景站</tspan>
+<tspan x="782" dy="16" font-size="12">Future Station</tspan>
+</text>
+</g><g id="heading">
+<text x="32" y="48" font-size="30" font-weight="700">示例市地铁线网图</text>
+<text x="32" y="77" font-size="16">Metro style · interchanges and underground / surface / elevated sections</text>
+</g>
+<g id="legend" transform="translate(1020 140)"><rect width="310" height="412" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="16" y="27" font-size="17">图例 / Legend</text>
+<path d="M16 50 H62" fill="none" stroke="#D8443C" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="55" font-size="14">1 号线 / Line 1</text>
+<path d="M16 90 H62" fill="none" stroke="#247BA0" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="95" font-size="14">2 号线 / Line 2</text>
+<path d="M16 130 H62" fill="none" stroke="#238B57" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="135" font-size="14">3 号线 / Line 3</text>
+<path d="M16 170 H62" fill="none" stroke="#64748b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="175" font-size="14">地下段</text>
+<path d="M16 210 H62" fill="none" stroke="#64748b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 210 H62" fill="none" stroke="#ffffff" stroke-width="4.32" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="215" font-size="14">地面 / 高架段</text>
+<g transform="translate(39 250)"><circle r="5.5" fill="#ffffff" stroke="#64748b" stroke-width="2.5"/></g>
+<text x="76" y="255" font-size="14">普通站</text>
+<g transform="translate(39 290)"><circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#247BA0"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#238B57"/></g>
+<text x="76" y="295" font-size="14">两线换乘站</text>
+<g transform="translate(39 330)"><circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M8.3641 -9.2893 A12.5 12.5 0 0 0 -8.3641 -9.2893" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-10.9651 -6.9474 L-8.4767 -13.8977 L-3.7927 -8.6957 Z" fill="#D8443C"/><path class="transfer-arrow" d="M3.8627 11.8882 A12.5 12.5 0 0 0 12.2268 -2.5989" fill="none" stroke="#238B57" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M11.4992 -6.0224 L16.2741 -0.3921 L9.4271 1.0632 Z" fill="#238B57"/><path class="transfer-arrow" d="M-12.2268 -2.5989 A12.5 12.5 0 0 0 -3.8627 11.8882" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-0.534 12.9698 L-7.7974 14.2899 L-5.6343 7.6325 Z" fill="#247BA0"/></g>
+<text x="76" y="335" font-size="14">三线换乘站</text>
+<g transform="translate(39 370)"><circle r="5.5" fill="#ffffff" stroke="#858b91" stroke-width="2.5" stroke-dasharray="3 2"/></g>
+<text x="76" y="375" font-size="14">预留 / 未开放站</text>
+</g>
+<g id="annotations">
+<text x="32" y="820" font-size="14" text-anchor="start">样式示例：结构转换可在站间发生，不增加车站；未开放站不改变其相邻区段的敷设方式。</text>
+<text x="32" y="850" font-size="14" text-anchor="start">虚构数据；地面/高架用空心线是本套默认约定，可按目标网络覆盖。</text>
+</g></g></svg>

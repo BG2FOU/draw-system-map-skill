@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "title": "示例城市线网图",
+  "subtitle": "Sample City Network · fictional data",
+  "canvas": { "width": 1000, "height": 700, "background": "#ffffff" },
+  "style": { "route_width": 8, "corner_radius": 28 },
+  "stations": [
+    { "id": "west", "name": "西园", "secondary_name": "West Park", "point": [140, 310], "label": { "offset": [0, -25], "anchor": "middle" } },
+    { "id": "central", "name": "中央广场", "secondary_name": "Central Square", "point": [390, 310], "label": { "offset": [20, -28] } },
+    { "id": "east", "name": "东门", "secondary_name": "East Gate", "point": [650, 310], "label": { "offset": [0, -25], "anchor": "middle" } },
+    { "id": "north", "name": "北城", "secondary_name": "North Town", "point": [390, 150], "label": { "offset": [20, -4] } },
+    { "id": "harbor", "name": "港湾", "secondary_name": "Harbor", "point": [650, 530], "label": { "offset": [20, 0] } }
+  ],
+  "routes": [
+    { "id": "red", "name": "红线 / Red", "color": "#D8443C", "mode": "metro", "segments": [{ "points": ["west", "central", "east"] }] },
+    { "id": "blue", "name": "蓝线 / Blue", "color": "#247BA0", "mode": "regional", "segments": [{ "points": ["north", "central", [390, 440], [650, 440], "harbor"] }] }
+  ],
+  "legend": { "point": [740, 130], "width": 220, "title": "图例 / Legend" },
+  "annotations": [{ "point": [32, 660], "text": "虚构示例；示意位置不代表实际地理比例。" }]
+}
