@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="map-title">
+<title id="map-title">河谷城区线网示意图</title>
+<desc>Schematic network; positions do not imply geographic scale. Editable vector paths and text.</desc>
+<rect width="1400" height="900" fill="#ffffff"/>
+<g font-family="Noto Sans CJK SC, Microsoft YaHei, sans-serif" fill="#243746">
+<g id="regions">
+</g>
+<g id="basemap" clip-path="url(#basemap-frame)">
+<defs><clipPath id="basemap-frame" clipPathUnits="userSpaceOnUse"><rect x="30" y="120" width="1040" height="650"/></clipPath>
+<clipPath id="basemap-clip-west-district" clipPathUnits="userSpaceOnUse">
+<path d="M 30 120 L 1070 120 L 1070 770 L 30 770 L 30 120 Z M 105 520 Q 65 640 120 720 Q 300 750 430 690 Q 445 565 390 525 Q 230 475 105 520 Z" fill-rule="nonzero" clip-rule="nonzero"/>
+<path d="M 265 575 Q 315 555 355 585 L 355 660 L 260 660 L 265 575 Z" fill-rule="nonzero" clip-rule="nonzero"/>
+</clipPath>
+<clipPath id="basemap-clip-east-district" clipPathUnits="userSpaceOnUse">
+<path d="M 30 120 L 1070 120 L 1070 770 L 30 770 L 30 120 Z M 105 520 Q 65 640 120 720 Q 300 750 430 690 Q 445 565 390 525 Q 230 475 105 520 Z" fill-rule="nonzero" clip-rule="nonzero"/>
+</clipPath>
+</defs>
+<rect id="basemap-background" x="30" y="120" width="1040" height="650" fill="#dceef6"/>
+<g id="basemap-land">
+<g id="basemap-feature-mainland" data-feature="mainland" data-kind="land" fill="#f6f3eb" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-mainland-0" d="M 30 120 L 1070 120 L 1070 770 L 30 770 Z M 105 520 Q 230 475 390 525 Q 445 565 430 690 Q 300 750 120 720 Q 65 640 105 520 Z" fill-rule="evenodd"/>
+</g>
+<g id="basemap-feature-lake-island" data-feature="lake-island" data-kind="island" fill="#f6f3eb" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-lake-island-0" d="M 265 575 Q 315 555 355 585 L 355 660 L 260 660 Z" fill-rule="evenodd"/>
+</g>
+</g>
+<g id="basemap-admin">
+<g id="basemap-feature-west-district" data-feature="west-district" data-kind="admin" fill="#efe9db" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#basemap-clip-west-district)">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-west-district-0" d="M 30 120 L 650 120 L 650 770 L 30 770 Z" fill-rule="evenodd"/>
+</g>
+<g id="basemap-feature-east-district" data-feature="east-district" data-kind="admin" fill="#e5eddf" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#basemap-clip-east-district)">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-east-district-0" d="M 650 120 L 1070 120 L 1070 770 L 650 770 Z" fill-rule="evenodd"/>
+</g>
+</g>
+<g id="basemap-water">
+<g id="basemap-feature-river" data-feature="river" data-kind="river" fill="#dceef6" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-river-0" d="M 600 120 C 650 250 630 350 620 430 C 600 530 680 640 630 770 L 700 770 C 750 640 670 530 690 430 C 710 300 710 230 680 120 Z" fill-rule="evenodd"/>
+</g>
+<g id="basemap-feature-branch" data-feature="branch" data-kind="river" fill="none" stroke="#dceef6" stroke-width="16" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-branch-0" d="M 650 450 Q 500 480 400 570 L 380 600"/>
+</g>
+<g id="basemap-feature-lake" data-feature="lake" data-kind="water" fill="#dceef6" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-lake-0" d="M 105 520 Q 230 475 390 525 Q 445 565 430 690 Q 300 750 120 720 Q 65 640 105 520 Z M 265 575 Q 315 555 355 585 L 355 660 L 260 660 Z" fill-rule="evenodd"/>
+</g>
+<g id="basemap-feature-pond" data-feature="pond" data-kind="water" fill="#dceef6" stroke="none" stroke-width="0" opacity="1" stroke-linecap="round" stroke-linejoin="round">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-pond-0" d="M 290 600 L 322 600 L 322 625 L 290 625 Z" fill-rule="evenodd"/>
+</g>
+</g>
+<g id="basemap-boundary">
+<g id="basemap-feature-district-border" data-feature="district-border" data-kind="boundary" fill="none" stroke="#8a99a1" stroke-width="1.2" opacity="0.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4">
+<desc>虚构示例，仅演示示意底图绘制方法</desc>
+<path id="basemap-geometry-district-border-0" d="M 650 120 L 650 770"/>
+</g>
+</g>
+<g id="basemap-labels">
+<text id="basemap-label-west-name" data-feature="west-district" x="190" y="420" text-anchor="middle" fill="#7b8991" font-size="22" opacity="0.85">
+<tspan x="190" y="420.0">西城区</tspan>
+<tspan x="190" y="438.0" font-size="14">West District</tspan>
+</text>
+<text id="basemap-label-east-name" data-feature="east-district" x="880" y="470" text-anchor="middle" fill="#7b8991" font-size="22" opacity="0.85">
+<tspan x="880" y="470.0">东城区</tspan>
+<tspan x="880" y="488.0" font-size="14">East District</tspan>
+</text>
+<text id="basemap-label-lake-name" data-feature="lake" x="170" y="675" text-anchor="middle" fill="#7b8991" font-size="22" opacity="0.85">
+<tspan x="170" y="675.0">澄湖</tspan>
+<tspan x="170" y="693.0" font-size="14">Clear Lake</tspan>
+</text>
+<text id="basemap-label-island-name" data-feature="lake-island" x="305" y="644" text-anchor="middle" fill="#7b8991" font-size="14" opacity="0.85">
+<tspan x="305" y="644.0">湖心岛</tspan>
+<tspan x="305" y="658.0" font-size="10">Lake Island</tspan>
+</text>
+<text id="basemap-label-river-name" data-feature="river" x="765" y="585" text-anchor="middle" fill="#7b8991" font-size="20" opacity="0.85">
+<tspan x="765" y="585.0">澄江</tspan>
+<tspan x="765" y="603.0" font-size="14">Cheng River</tspan>
+</text>
+</g>
+</g>
+<g id="routes">
+<g data-route="red" data-mode=""><title>1 号线 / Crosstown</title><g data-track-layer="outline"><g data-segment="0" data-structure="underground"><path d="M160 300 L440 300 L560 300" fill="none" stroke="#b96354" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="elevated"><path d="M560 300 L780 300" fill="none" stroke="#b96354" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="2" data-structure="underground"><path d="M780 300 L960 300" fill="none" stroke="#b96354" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"><g data-segment="1" data-structure="elevated"><path d="M560 300 L780 300" fill="none" stroke="#ffffff" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+<g data-route="blue" data-mode=""><title>2 号线 / Valley Line</title><g data-track-layer="outline"><g data-segment="0" data-structure="underground"><path d="M440 190 L440 300 L440 440 L481.799 481.799 A28 28 0 0 1 490 501.598 L490 650" fill="none" stroke="#347e9a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="surface"><path d="M490 650 L840 650" fill="none" stroke="#347e9a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"><g data-segment="1" data-structure="surface"><path d="M490 650 L840 650" fill="none" stroke="#ffffff" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round"/></g></g></g>
+</g><g id="stations">
+<g data-station="west" data-status="open" transform="translate(160 300)"><title>西站</title>
+<circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>
+</g>
+<g data-station="central" data-status="open" transform="translate(440 300)"><title>市中心</title>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#b96354" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#b96354"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#347e9a" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#347e9a"/>
+</g>
+<g data-station="bank" data-status="open" transform="translate(560 300)"><title>西岸</title>
+<circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>
+</g>
+<g data-station="east" data-status="open" transform="translate(780 300)"><title>东站</title>
+<circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>
+</g>
+<g data-station="park" data-status="open" transform="translate(960 300)"><title>东园</title>
+<circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>
+</g>
+<g data-station="north" data-status="open" transform="translate(440 190)"><title>北门</title>
+<circle r="5.5" fill="#ffffff" stroke="#347e9a" stroke-width="2.5"/>
+</g>
+<g data-station="museum" data-status="open" transform="translate(440 440)"><title>博物馆</title>
+<circle r="5.5" fill="#ffffff" stroke="#347e9a" stroke-width="2.5"/>
+</g>
+<g data-station="south" data-status="open" transform="translate(490 650)"><title>湖南路</title>
+<circle r="5.5" fill="#ffffff" stroke="#347e9a" stroke-width="2.5"/>
+</g>
+<g data-station="garden" data-status="open" transform="translate(840 650)"><title>南园</title>
+<circle r="5.5" fill="#ffffff" stroke="#347e9a" stroke-width="2.5"/>
+</g>
+</g><g id="labels">
+<text data-label="west" x="160" y="277" text-anchor="middle" font-size="17"><tspan x="160">西站</tspan>
+<tspan x="160" dy="15" font-size="11">West Station</tspan>
+</text>
+<text data-label="central" x="420" y="274" text-anchor="end" font-size="17"><tspan x="420">市中心</tspan>
+<tspan x="420" dy="15" font-size="11">City Center</tspan>
+</text>
+<text data-label="bank" x="560" y="277" text-anchor="middle" font-size="17"><tspan x="560">西岸</tspan>
+<tspan x="560" dy="15" font-size="11">West Bank</tspan>
+</text>
+<text data-label="east" x="780" y="277" text-anchor="middle" font-size="17"><tspan x="780">东站</tspan>
+<tspan x="780" dy="15" font-size="11">East Station</tspan>
+</text>
+<text data-label="park" x="960" y="277" text-anchor="middle" font-size="17"><tspan x="960">东园</tspan>
+<tspan x="960" dy="15" font-size="11">East Park</tspan>
+</text>
+<text data-label="north" x="460" y="190" text-anchor="start" font-size="17"><tspan x="460">北门</tspan>
+<tspan x="460" dy="15" font-size="11">North Gate</tspan>
+</text>
+<text data-label="museum" x="420" y="425" text-anchor="end" font-size="17"><tspan x="420">博物馆</tspan>
+<tspan x="420" dy="15" font-size="11">Museum</tspan>
+</text>
+<text data-label="south" x="490" y="680" text-anchor="middle" font-size="17"><tspan x="490">湖南路</tspan>
+<tspan x="490" dy="15" font-size="11">Lake South Road</tspan>
+</text>
+<text data-label="garden" x="840" y="680" text-anchor="middle" font-size="17"><tspan x="840">南园</tspan>
+<tspan x="840" dy="15" font-size="11">South Garden</tspan>
+</text>
+</g><g id="heading">
+<text x="32" y="48" font-size="30" font-weight="700">河谷城区线网示意图</text>
+<text x="32" y="77" font-size="16">Inland valley · river branches, a lake island and administrative land clips</text>
+</g>
+<g id="legend" transform="translate(1110 145)"><rect width="260" height="212" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="16" y="27" font-size="17">线路与结构 / Legend</text>
+<path d="M16 50 H62" fill="none" stroke="#b96354" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="55" font-size="14">1 号线 / Crosstown</text>
+<path d="M16 90 H62" fill="none" stroke="#347e9a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="95" font-size="14">2 号线 / Valley Line</text>
+<path d="M16 130 H62" fill="none" stroke="#64748b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="135" font-size="14">地下段</text>
+<path d="M16 170 H62" fill="none" stroke="#64748b" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 170 H62" fill="none" stroke="#ffffff" stroke-width="3.84" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76" y="175" font-size="14">地面 / 高架段</text>
+</g>
+<g id="annotations">
+<text x="36" y="825" font-size="15" text-anchor="start">虚构示例 · 示意坐标不代表真实地理比例；行政填色、自然地物与线网分别编辑。</text>
+<text x="36" y="855" font-size="13" text-anchor="start">Schematic only · Editable land, water, boundaries and regional labels.</text>
+</g></g></svg>

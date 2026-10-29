@@ -28,6 +28,26 @@ python3 scripts/draw_map.py assets/metro-style-network.json --output output/metr
 python3 scripts/export_png.py output/metro-style.svg output/metro-style.png --scale 1.5
 ```
 
+## 行政区与自然地理底图
+
+支持独立的陆地、岛屿、水域、河流、行政填色/边界和区域标签。轮廓可用直线或贝塞尔曲线，多面与孔洞可表达湖中岛及岛上池塘；行政填色按指定陆地范围裁切。旧 `regions` 输入继续可用。
+
+[底图绘制手册](references/basemap-guide.md)说明来源整理、跨水关系、轮廓简化、图层、裁切和标签安排。两份虚构示例可直接运行：
+
+```bash
+python3 scripts/draw_map.py assets/coastal-basemap-network.json --output output/coastal.svg
+python3 scripts/draw_map.py assets/inland-basemap-network.json --output output/inland.svg
+python3 scripts/export_png.py output/coastal.svg output/coastal.png --scale 1.5
+```
+
+![沿海群岛底图示例](assets/previews/coastal-basemap.png)
+
+![内陆河流与行政区示例](assets/previews/inland-basemap.png)
+
+## 后续改进计划
+
+本次发布范围为可编辑 SVG、PNG 预览、通用线网样式和行政区/自然地理底图。Adobe Illustrator 原生 `.ai` 工程导出已转入[后续改进计划](references/roadmap.md)，不作为本次发布条件；公开包不包含其尚未完成原生验收的准备脚本、JSX 和试验手册。
+
 ## 安装与调用
 
 将整个仓库作为一个 skill 文件夹使用，保留 `SKILL.md`、`agents`、`scripts`、`references`、`assets` 的相对位置。
@@ -130,7 +150,7 @@ SVG 保留线路路径、站点、换乘箭头/环和 `<text>` 文字，并按�
 python3 -m unittest discover -s tests -v
 ```
 
-测试不含任何城市固定站数或交通类型规格。9 项标准库测试覆盖 Unicode/XML 转义、分支与换乘身份、双色/三色箭头与颜色方位、预留站、结构区段与覆盖映射、闭环与线型、圆角端点、无效数据、任意目录调用及只读一致性检查；另有 1 项可选 librsvg 像素回归，检查转换处不随区段顺序和路径方向改变，没有 PyGObject/librsvg 时跳过。本次 Linux 环境 10 项均通过，并使用 librsvg 导出、查看三份示例；不将这等同于已完成所有操作系统和 CairoSVG 渲染器验收。
+测试不含任何城市固定站数或交通类型规格。公开发行包包含 27 项测试：20 项标准库检查和 7 项可选 librsvg 像素回归，覆盖换乘、线型、旧模板一致性、几何/引用、底图多面与孔洞、行政裁切并集、图层、画框裁切及可编辑地理标签。缺少 PyGObject/librsvg 时像素测试明确跳过。本次 Linux 环境全部通过，并渲染查看五份示例；Windows、macOS 和 CairoSVG 尚未实测。
 
 ## 常见问题
 

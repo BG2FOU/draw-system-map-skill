@@ -11,6 +11,7 @@
 | `style` | 全局字体/几何/文字样式；`interchange_style`、`interchange_radius`、`reserved_color`、`structure_patterns` 详见 [样式规则](style-rules.md) |
 | `stations` | 站点/节点数组，必填；名称不限语言 |
 | `routes` | 线路数组，必填；一个线路可以包含多个区段形成支线或分段样式 |
+| `basemap` | 可选的分层底图，契约见 [底图指南](basemap-guide.md)；支持行政区、陆地/岛屿、水域/河流、曲线/孔洞、裁切和独立标签 |
 | `regions` | 可选背景多边形数组，每项 `points` 至少三个坐标、`fill` 为颜色；不从地名自动生成地理轮廓 |
 | `legend` | 可选图例：`point` 为左上坐标、`width`、`title`；每条线路自动占一行，`items` 可追加结构与站点符号；省略则不绘图例 |
 | `annotations` | 可选任意说明文字：`point`、`text`，可选 `size` 和 `anchor`；可用于区域名、来源或版权 |
@@ -64,3 +65,5 @@
 此格式支持示意网络的常用骨架，坐标、站名、线宽及标签偏移彼此独立。工具不会自动分开平行重叠线路、推断换乘、选择最优布局、测量标签碰撞、处理真实 GIS 投影或推演车辆。并行线路应由输入安排各自路径；大规模密集线网需要分区布局和多轮视觉调整。
 
 生成 SVG 包含 `regions/routes/stations/labels/heading/legend/annotations` 等分组（图例可省略），文字保留为 `<text>`。临时在矢量编辑器里调整后，应回写 JSON 或生成器再生成，确保后续可复现。
+
+原生 `.ai` 工程导出已转入[后续改进计划](roadmap.md)，不改变本次 JSON、SVG 和 PNG 的数据约定。

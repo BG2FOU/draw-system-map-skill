@@ -1,0 +1,768 @@
+{
+  "version": 1,
+  "title": "河谷城区线网示意图",
+  "subtitle": "Inland valley · river branches, a lake island and administrative land clips",
+  "canvas": {
+    "width": 1400,
+    "height": 900
+  },
+  "style": {
+    "route_width": 8,
+    "corner_radius": 28,
+    "label_size": 17,
+    "secondary_size": 11
+  },
+  "stations": [
+    {
+      "id": "west",
+      "name": "西站",
+      "secondary_name": "West Station",
+      "point": [
+        160,
+        300
+      ],
+      "label": {
+        "offset": [
+          0,
+          -23
+        ],
+        "anchor": "middle"
+      }
+    },
+    {
+      "id": "central",
+      "name": "市中心",
+      "secondary_name": "City Center",
+      "point": [
+        440,
+        300
+      ],
+      "label": {
+        "offset": [
+          -20,
+          -26
+        ],
+        "anchor": "end"
+      }
+    },
+    {
+      "id": "bank",
+      "name": "西岸",
+      "secondary_name": "West Bank",
+      "point": [
+        560,
+        300
+      ],
+      "label": {
+        "offset": [
+          0,
+          -23
+        ],
+        "anchor": "middle"
+      }
+    },
+    {
+      "id": "east",
+      "name": "东站",
+      "secondary_name": "East Station",
+      "point": [
+        780,
+        300
+      ],
+      "label": {
+        "offset": [
+          0,
+          -23
+        ],
+        "anchor": "middle"
+      }
+    },
+    {
+      "id": "park",
+      "name": "东园",
+      "secondary_name": "East Park",
+      "point": [
+        960,
+        300
+      ],
+      "label": {
+        "offset": [
+          0,
+          -23
+        ],
+        "anchor": "middle"
+      }
+    },
+    {
+      "id": "north",
+      "name": "北门",
+      "secondary_name": "North Gate",
+      "point": [
+        440,
+        190
+      ],
+      "label": {
+        "offset": [
+          20,
+          0
+        ],
+        "anchor": "start"
+      }
+    },
+    {
+      "id": "museum",
+      "name": "博物馆",
+      "secondary_name": "Museum",
+      "point": [
+        440,
+        440
+      ],
+      "label": {
+        "offset": [
+          -20,
+          -15
+        ],
+        "anchor": "end"
+      }
+    },
+    {
+      "id": "south",
+      "name": "湖南路",
+      "secondary_name": "Lake South Road",
+      "point": [
+        490,
+        650
+      ],
+      "label": {
+        "offset": [
+          0,
+          30
+        ],
+        "anchor": "middle"
+      }
+    },
+    {
+      "id": "garden",
+      "name": "南园",
+      "secondary_name": "South Garden",
+      "point": [
+        840,
+        650
+      ],
+      "label": {
+        "offset": [
+          0,
+          30
+        ],
+        "anchor": "middle"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "red",
+      "name": "1 号线 / Crosstown",
+      "color": "#b96354",
+      "segments": [
+        {
+          "points": [
+            "west",
+            "central",
+            "bank"
+          ],
+          "structure": "underground"
+        },
+        {
+          "points": [
+            "bank",
+            "east"
+          ],
+          "structure": "elevated"
+        },
+        {
+          "points": [
+            "east",
+            "park"
+          ],
+          "structure": "underground"
+        }
+      ]
+    },
+    {
+      "id": "blue",
+      "name": "2 号线 / Valley Line",
+      "color": "#347e9a",
+      "segments": [
+        {
+          "points": [
+            "north",
+            "central",
+            "museum",
+            [
+              490,
+              490
+            ],
+            "south"
+          ],
+          "structure": "underground"
+        },
+        {
+          "points": [
+            "south",
+            "garden"
+          ],
+          "structure": "surface"
+        }
+      ]
+    }
+  ],
+  "basemap": {
+    "frame": [
+      30,
+      120,
+      1040,
+      650
+    ],
+    "background": "#dceef6",
+    "features": [
+      {
+        "id": "mainland",
+        "kind": "land",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  30,
+                  120
+                ],
+                [
+                  "L",
+                  1070,
+                  120
+                ],
+                [
+                  "L",
+                  1070,
+                  770
+                ],
+                [
+                  "L",
+                  30,
+                  770
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": [
+                [
+                  [
+                    "M",
+                    105,
+                    520
+                  ],
+                  [
+                    "Q",
+                    230,
+                    475,
+                    390,
+                    525
+                  ],
+                  [
+                    "Q",
+                    445,
+                    565,
+                    430,
+                    690
+                  ],
+                  [
+                    "Q",
+                    300,
+                    750,
+                    120,
+                    720
+                  ],
+                  [
+                    "Q",
+                    65,
+                    640,
+                    105,
+                    520
+                  ],
+                  [
+                    "Z"
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法"
+      },
+      {
+        "id": "lake-island",
+        "kind": "island",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  265,
+                  575
+                ],
+                [
+                  "Q",
+                  315,
+                  555,
+                  355,
+                  585
+                ],
+                [
+                  "L",
+                  355,
+                  660
+                ],
+                [
+                  "L",
+                  260,
+                  660
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": []
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法"
+      },
+      {
+        "id": "west-district",
+        "kind": "admin",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  30,
+                  120
+                ],
+                [
+                  "L",
+                  650,
+                  120
+                ],
+                [
+                  "L",
+                  650,
+                  770
+                ],
+                [
+                  "L",
+                  30,
+                  770
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": []
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "clip_to": [
+          "mainland",
+          "lake-island"
+        ],
+        "style": {
+          "fill": "#efe9db"
+        }
+      },
+      {
+        "id": "east-district",
+        "kind": "admin",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  650,
+                  120
+                ],
+                [
+                  "L",
+                  1070,
+                  120
+                ],
+                [
+                  "L",
+                  1070,
+                  770
+                ],
+                [
+                  "L",
+                  650,
+                  770
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": []
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "clip_to": [
+          "mainland"
+        ],
+        "style": {
+          "fill": "#e5eddf"
+        }
+      },
+      {
+        "id": "river",
+        "kind": "river",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  600,
+                  120
+                ],
+                [
+                  "C",
+                  650,
+                  250,
+                  630,
+                  350,
+                  620,
+                  430
+                ],
+                [
+                  "C",
+                  600,
+                  530,
+                  680,
+                  640,
+                  630,
+                  770
+                ],
+                [
+                  "L",
+                  700,
+                  770
+                ],
+                [
+                  "C",
+                  750,
+                  640,
+                  670,
+                  530,
+                  690,
+                  430
+                ],
+                [
+                  "C",
+                  710,
+                  300,
+                  710,
+                  230,
+                  680,
+                  120
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": []
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法"
+      },
+      {
+        "id": "branch",
+        "kind": "river",
+        "geometry": {
+          "type": "line",
+          "paths": [
+            [
+              [
+                "M",
+                650,
+                450
+              ],
+              [
+                "Q",
+                500,
+                480,
+                400,
+                570
+              ],
+              [
+                "L",
+                380,
+                600
+              ]
+            ]
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "style": {
+          "stroke_width": 16
+        }
+      },
+      {
+        "id": "lake",
+        "kind": "water",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  105,
+                  520
+                ],
+                [
+                  "Q",
+                  230,
+                  475,
+                  390,
+                  525
+                ],
+                [
+                  "Q",
+                  445,
+                  565,
+                  430,
+                  690
+                ],
+                [
+                  "Q",
+                  300,
+                  750,
+                  120,
+                  720
+                ],
+                [
+                  "Q",
+                  65,
+                  640,
+                  105,
+                  520
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": [
+                [
+                  [
+                    "M",
+                    265,
+                    575
+                  ],
+                  [
+                    "Q",
+                    315,
+                    555,
+                    355,
+                    585
+                  ],
+                  [
+                    "L",
+                    355,
+                    660
+                  ],
+                  [
+                    "L",
+                    260,
+                    660
+                  ],
+                  [
+                    "Z"
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "order": 1
+      },
+      {
+        "id": "pond",
+        "kind": "water",
+        "geometry": {
+          "type": "area",
+          "parts": [
+            {
+              "outer": [
+                [
+                  "M",
+                  290,
+                  600
+                ],
+                [
+                  "L",
+                  322,
+                  600
+                ],
+                [
+                  "L",
+                  322,
+                  625
+                ],
+                [
+                  "L",
+                  290,
+                  625
+                ],
+                [
+                  "Z"
+                ]
+              ],
+              "holes": []
+            }
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "order": 2
+      },
+      {
+        "id": "district-border",
+        "kind": "boundary",
+        "geometry": {
+          "type": "line",
+          "paths": [
+            [
+              [
+                "M",
+                650,
+                120
+              ],
+              [
+                "L",
+                650,
+                770
+              ]
+            ]
+          ]
+        },
+        "source": "虚构示例，仅演示示意底图绘制方法",
+        "style": {
+          "stroke": "#8a99a1",
+          "opacity": 0.7
+        }
+      }
+    ],
+    "labels": [
+      {
+        "id": "west-name",
+        "feature": "west-district",
+        "point": [
+          190,
+          420
+        ],
+        "text": "西城区",
+        "secondary_text": "West District"
+      },
+      {
+        "id": "east-name",
+        "feature": "east-district",
+        "point": [
+          880,
+          470
+        ],
+        "text": "东城区",
+        "secondary_text": "East District"
+      },
+      {
+        "id": "lake-name",
+        "feature": "lake",
+        "point": [
+          170,
+          675
+        ],
+        "text": "澄湖",
+        "secondary_text": "Clear Lake"
+      },
+      {
+        "id": "island-name",
+        "feature": "lake-island",
+        "point": [
+          305,
+          644
+        ],
+        "text": "湖心岛",
+        "secondary_text": "Lake Island",
+        "size": 14,
+        "secondary_size": 10
+      },
+      {
+        "id": "river-name",
+        "feature": "river",
+        "point": [
+          765,
+          585
+        ],
+        "text": "澄江",
+        "secondary_text": "Cheng River",
+        "size": 20
+      }
+    ]
+  },
+  "legend": {
+    "point": [
+      1110,
+      145
+    ],
+    "width": 260,
+    "title": "线路与结构 / Legend",
+    "items": [
+      {
+        "name": "地下段",
+        "structure": "underground"
+      },
+      {
+        "name": "地面 / 高架段",
+        "structure": "surface"
+      }
+    ]
+  },
+  "annotations": [
+    {
+      "point": [
+        36,
+        825
+      ],
+      "text": "虚构示例 · 示意坐标不代表真实地理比例；行政填色、自然地物与线网分别编辑。",
+      "size": 15
+    },
+    {
+      "point": [
+        36,
+        855
+      ],
+      "text": "Schematic only · Editable land, water, boundaries and regional labels.",
+      "size": 13
+    }
+  ]
+}

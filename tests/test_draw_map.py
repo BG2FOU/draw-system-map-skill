@@ -10,6 +10,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 SKILL = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SKILL / "scripts"))
 spec = importlib.util.spec_from_file_location("draw_map", SKILL / "scripts/draw_map.py")
 draw_map = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(draw_map)
@@ -19,6 +20,23 @@ NS = {"s": "http://www.w3.org/2000/svg"}
 class PortableMapTests(unittest.TestCase):
     def setUp(self):
         self.data = json.loads((SKILL / "assets/minimal-network.json").read_text(encoding="utf-8"))
+
+    def test_existing_templates_reproduce_their_unchanged_svg(self):
+        for name in ["minimal", "multimodal", "metro-style"]:
+            with self.subTest(template=name):
+                data = json.loads((SKILL / f"assets/{name}-network.json").read_text(encoding="utf-8"))
+                self.assertEqual(draw_map.render(data), (SKILL / f"assets/previews/{name}.svg").read_text(encoding="utf-8"))
+
+    def test_basemap_is_below_routes_and_above_legacy_regions(self):
+        self.data["basemap"] = {"frame": [20, 100, 600, 400], "background": "#dceef6", "features": []}
+        svg = draw_map.render(self.data)
+        root = ET.fromstring(svg)
+        self.assertIsNotNone(root.find('.//s:g[@id="basemap"]', NS))
+        self.assertLess(svg.index('id="regions"'), svg.index('id="basemap"'))
+        self.assertLess(svg.index('id="basemap"'), svg.index('id="routes"'))
+        self.data["basemap"]["frame"] = [20, 100, -1, 400]
+        with self.assertRaises(draw_map.MapError):
+            draw_map.render(self.data)
 
     def test_unicode_and_special_characters_remain_editable_text(self):
         self.data["stations"][0]["name"] = '北 & Süd <Park> "A"'

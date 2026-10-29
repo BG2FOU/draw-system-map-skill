@@ -10,6 +10,8 @@ import re
 import sys
 from pathlib import Path
 
+from basemap import BasemapError, render_basemap
+
 
 class MapError(ValueError):
     pass
@@ -262,7 +264,14 @@ def render(data):
         if len(points) < 3:
             raise MapError("region.points: at least three points required")
         parts.append(f'<polygon points="{" ".join(xy(p) for p in points)}" fill="{color(region.get("fill", "#e8f1f5"))}"/>')
-    parts.append('</g><g id="routes">')
+    if "basemap" in data:
+        try:
+            geography = render_basemap(data["basemap"], width, height)
+        except BasemapError as error:
+            raise MapError(str(error)) from error
+        parts.extend(['</g>', geography, '<g id="routes">'])
+    else:
+        parts.append('</g><g id="routes">')
     for rid, name, stroke, size, route_pattern, paths, mode in routes:
         parts.append(f'<g data-route="{esc(rid)}" data-mode="{esc(mode)}"><title>{esc(name)}</title>{paths}</g>')
     parts.append('</g><g id="stations">')
