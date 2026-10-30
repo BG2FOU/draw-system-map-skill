@@ -2,11 +2,25 @@
 
 **厦门地铁线网图风格的地铁线网图绘制 skill**
 
-为不同城市、不同交通方式绘制可编辑的线网示意图。可从站点/线路数据、参考图片或已有 SVG 开始，适用于地铁、公交、有轨电车、市域铁路、轮渡和混合网络，也可用于结构相似的节点连线图。
+为不同城市、不同交通方式绘制可编辑的线网示意图。现在可直接提供国家、城市和线路范围，由 Agent 查找官方数据、导入站序并自动生成初稿；也可从 GTFS 链接/ZIP、站序 CSV、参考图片或已有 SVG 开始，适用于地铁、公交、有轨电车、市域铁路、轮渡和混合网络，也可用于结构相似的节点连线图。
 
 以厦门地铁线网图的圆角线路、清晰换乘和中英文标注为视觉参考，也支持用户指定的其他风格。城市名称、站数、颜色、语言、线型和图例语义均由输入决定，不依赖任何城市项目或专项校验。
 
 ![换乘与地上地下段样式示例](assets/previews/metro-style.png)
+
+## 从城市名称开始
+
+```text
+使用 $draw-system-map，绘制芬兰赫尔辛基地铁 M1/M2 线网图。
+先查找官方数据并说明日期，提取站序、支线和共享车站，无需我逐站录入。
+保留原文名称，生成初稿后调整密集标签，交付源文件、可编辑 SVG 与 PNG。
+```
+
+默认流程为：**找来源 → 导入站序/身份 → 自动初稿 → 查看与微调 → 导出**。优先官方 GTFS；没有 GTFS 时由 Agent 读取官方线路页/API，整理为统一输入。工具不保证每个城市都有完整公开数据，也不把初稿视为已完成精排。
+
+- [城市检索、数据下载、生成器与局部修订手册](references/import-guide.md)
+- [GTFS/CSV/拓扑 JSON 输入约定](references/source-data-format.md)
+- [美国 BART、芬兰 HSL 实际来源验收](references/import-validation.md)
 
 ## 已包含的地铁制图风格
 
@@ -46,7 +60,7 @@ python3 scripts/export_png.py output/coastal.svg output/coastal.png --scale 1.5
 
 ## 后续改进计划
 
-本次发布范围为可编辑 SVG、PNG 预览、通用线网样式和行政区/自然地理底图。Adobe Illustrator 原生 `.ai` 工程导出已转入[后续改进计划](references/roadmap.md)，不作为本次发布条件；公开包不包含其尚未完成原生验收的准备脚本、JSX 和试验手册。
+本次发布包含来源下载与 GTFS/CSV 导入、自动初稿与局部覆盖、可编辑 SVG、PNG 预览、通用线网样式和行政区/自然地理底图。Adobe Illustrator 原生 `.ai` 工程导出已转入[后续改进计划](references/roadmap.md)，不作为本次发布条件；公开包不包含其尚未完成原生验收的准备脚本、JSX 和试验手册。
 
 ## 安装与调用
 
@@ -63,7 +77,7 @@ git clone https://github.com/BG2FOU/draw-system-map-skill.git .agents/skills/dra
 直接向 Agent 发送：
 
 ```text
-使用 $draw-system-map，根据我提供的站序和参考图，绘制这座城市的轨道交通线网图。
+使用 $draw-system-map，根据指定城市的官方公开数据，或我提供的站序和参考图，绘制轨道交通线网图。
 保留原名称和指定配色，区分换乘与普通交叉，交付可编辑 SVG、源数据和 PNG。
 ```
 
@@ -86,22 +100,20 @@ git clone https://github.com/BG2FOU/draw-system-map-skill.git .agents/skills/dra
 SVG 生成仅依赖 **Python 3.10+ 标准库**。以下命令在此文件所在目录运行；也可用脚本的绝对路径从任意目录调用。Windows 如没有 `python3` 命令，可换为 `python`。
 
 ```bash
-# 先运行随包附带的虚构数据，查看结果
+# 不用手填坐标：从随包的虚构站序生成初稿（输出目录须不存在）
+python3 scripts/create_map.py build assets/import-examples/station-sequences.csv \
+  --title "站序自动生成示例 / Sequence import example" \
+  --attribution "Fictional data for the draw-system-map skill" \
+  --output-dir output/import-demo --png
+
+# 已有绘图 JSON 可继续使用原入口
 python3 scripts/draw_map.py assets/minimal-network.json --output output/network.svg
-
-# 可选：确认已有 SVG 与输入一致，不写文件
 python3 scripts/draw_map.py assets/minimal-network.json --output output/network.svg --check
-
-# 可选：导出 PNG，默认 2 倍像素
-python3 scripts/export_png.py output/network.svg output/network.png --scale 2
 ```
 
-创建自己的图时，复制 `assets/minimal-network.json` 为 `network.json`，填入真实输入，再运行：
+没有 PNG 环境时去掉 `--png`。实际 GTFS 的下载、线路选择、日期筛选与命令见[导入手册](references/import-guide.md)；CSV/拓扑输入不要求经纬度。只有需要从空白精确构图时，才复制 `assets/minimal-network.json` 手工填写画布坐标。
 
-```bash
-python3 scripts/draw_map.py network.json --output output/network.svg
-python3 scripts/export_png.py output/network.svg output/network.png --scale 2
-```
+![只提供站序得到的自动初稿](assets/previews/import-draft.png)
 
 PNG 导出需要以下任一环境：系统 PyGObject + librsvg/Pango，或 CairoSVG + 系统 Cairo。`--renderer auto` 默认优先使用 librsvg；可显式传 `--renderer librsvg` 或 `--renderer cairosvg`。CairoSVG 可通过 Python 环境安装 `cairosvg`，某些系统仍需单独安装 Cairo。没有这些依赖时 SVG 仍可生成并在浏览器/矢量编辑器中打开。
 
@@ -109,7 +121,7 @@ PNG 导出需要以下任一环境：系统 PyGObject + librsvg/Pango，或 Cair
 
 ## 输入数据怎么写
 
-完整字段说明见 [数据格式](references/data-format.md)。最重要的概念：
+常规导入输入见[来源拓扑与站序 CSV](references/source-data-format.md)。下表是自动生成后可进一步编辑的绘图格式，完整字段说明见 [数据格式](references/data-format.md)：
 
 | 内容 | 表达方式 |
 | --- | --- |
@@ -125,7 +137,7 @@ PNG 导出需要以下任一环境：系统 PyGObject + librsvg/Pango，或 Cair
 | 标签 | 用站点 `label.offset` 和 `anchor` 调整，不移动站点身份 |
 | 背景与说明 | `regions` 多边形与 `annotations` 文字 |
 
-布局方法见 [绘图指南](references/drawing-guide.md)。生成器会把转弯控制点圆角化，保持站点坐标精确；不会自动计算全网最优坐标、分离重叠线路或解决文字碰撞。复杂风格可以扩展生成器或继续使用已有项目的绘图实现。
+布局方法见 [绘图指南](references/drawing-guide.md)。绘图器会把转弯控制点圆角化，保持站点坐标精确。前置生成器提供初稿布局、密集站点拉开、共享站间线路错开与冲突报告；复杂交会和长站名仍需查看并调整，不保证全网最优或零碰撞。复杂风格可以扩展生成器或继续使用已有项目的绘图实现。
 
 ## 支线、环线与混合网络示例
 
@@ -150,13 +162,15 @@ SVG 保留线路路径、站点、换乘箭头/环和 `<text>` 文字，并按�
 python3 -m unittest discover -s tests -v
 ```
 
-测试不含任何城市固定站数或交通类型规格。公开发行包包含 27 项测试：20 项标准库检查和 7 项可选 librsvg 像素回归，覆盖换乘、线型、旧模板一致性、几何/引用、底图多面与孔洞、行政裁切并集、图层、画框裁切及可编辑地理标签。缺少 PyGObject/librsvg 时像素测试明确跳过。本次 Linux 环境全部通过，并渲染查看五份示例；Windows、macOS 和 CairoSVG 尚未实测。
+测试不含任何城市固定站数或交通类型规格。公开发行包包含 62 项测试：55 项标准库检查和 7 项可选 librsvg 像素回归，覆盖 GTFS 停站/父站/日期、分组、CSV、来源下载、确定性布局及覆盖、命令行流程，以及换乘、线型、旧模板一致性、几何/引用、底图孔洞与裁切。缺少 PyGObject/librsvg 时像素测试明确跳过。本次 Linux 环境全部通过，并查看五份原示例及新增站序初稿；Windows、macOS 和 CairoSVG 尚未实测。
 
 ## 常见问题
 
-- **没有原始坐标：** Agent 可以依据站序和参考图安排示意坐标；自动转换经纬度与自动布局求解不在当前工具内。
+- **没有数据文件：** 提供国家、城市和线路范围，Agent 先查官方来源；无可用来源时说明具体缺项。
+- **没有原始坐标：** 站序 CSV/拓扑输入可生成非地理初稿；完整经纬度可生成保留大体方位的初稿。
+- **同一线路被画成两条线：** 检查来源是否拆分方向 ID，按来源建立 `--route-groups` 显式映射。
 - **同名站不该换乘：** 使用不同 ID；需要合并时由来源明确为同一节点后共享 ID。
-- **图面重叠：** 修改路径控制点、站点位置、标签偏移或画布留白，再生成并查看；不要依赖 `--check` 发现视觉问题。
+- **图面重叠：** 查看 `report.json` 和图面，用独立覆盖文件调整站点/标签/路径；`--check` 不检查视觉质量。
 - **中文缺字或字体变化：** 安装/指定合适字体，再重新导出。
 - **PNG 提示无渲染器：** 安装可选渲染依赖，或先使用可编辑 SVG。
 - **修改 SVG 后又被覆盖：** 把调整写入数据/生成器，而不是只改派生产物。

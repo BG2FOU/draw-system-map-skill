@@ -1,0 +1,13 @@
+route_id,route_name,color,pattern_id,sequence,station_id,station_name,secondary_name,direction
+red,红线 / Red,#D8443C,main,10,west,西园,West Park,outbound
+red,红线 / Red,#D8443C,main,20,central,中央广场,Central Square,outbound
+red,红线 / Red,#D8443C,main,30,east,东门,East Gate,outbound
+red,红线 / Red,#D8443C,branch,10,central,中央广场,Central Square,branch
+red,红线 / Red,#D8443C,branch,20,harbor,港湾,Harbor,branch
+blue,Blue,#247BA0,main,1,north,北城,North Town,outbound
+blue,Blue,#247BA0,main,2,central,中央广场,Central Square,outbound
+blue,Blue,#247BA0,main,3,south,南站,South Station,outbound
+loop,Loop,#63854A,circle,1,east,东门,East Gate,circle
+loop,Loop,#63854A,circle,2,park,公园,Park,circle
+loop,Loop,#63854A,circle,3,harbor,港湾,Harbor,circle
+loop,Loop,#63854A,circle,4,east,东门,East Gate,circle

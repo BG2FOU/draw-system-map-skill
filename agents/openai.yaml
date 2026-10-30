@@ -1,4 +1,4 @@
 interface:
   display_name: "通用线网图绘制"
-  short_description: "为不同城市和交通网络绘制可编辑矢量线网图，支持源数据与图片参考"
-  default_prompt: "使用 $draw-system-map 根据提供的数据或参考图绘制线网示意图，保留名称、连接和指定样式，交付可编辑 SVG 与 PNG。"
+  short_description: "按城市查找公开线路数据并生成可编辑线网初稿，也支持站序、图片与已有源文件"
+  default_prompt: "使用 $draw-system-map 为指定国家和城市查找官方线路数据，生成并调整线网图，交付来源记录、可编辑 SVG 与 PNG。"

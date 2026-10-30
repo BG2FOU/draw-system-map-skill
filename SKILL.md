@@ -1,6 +1,6 @@
 ---
 name: draw-system-map
-description: "参考厦门地铁线网图风格或其他指定风格，为任意城市和线网类型绘制可编辑 SVG 与 PNG。支持行政区与自然地理底图、双语站名、支线环线、多色换乘箭头、预留站和地上/地下/高架区段；可从数据、参考图或已有矢量图开始，不依赖城市专用代码或校验。"
+description: "参考厦门地铁线网图风格或其他指定风格，为任意城市和线网类型绘制可编辑 SVG 与 PNG。支持行政区与自然地理底图、双语站名、支线环线、多色换乘箭头、预留站和地上/地下/高架区段；可按国家、城市和线路范围查找官方 GTFS/网页数据，自动提取站序并生成初稿，也可从 CSV、参考图或已有矢量图开始；不依赖城市专用校验。"
 ---
 
 # 绘制通用线网示意图
@@ -9,15 +9,23 @@ description: "参考厦门地铁线网图风格或其他指定风格，为任意
 
 ## 理解输入并选择绘图方式
 
-从用户提供的线路/站点数据、参考图、现有 SVG 和上下文确定线路顺序、共享站点、支线/环线、需要保留的文字及输出尺寸。沿用明确的约定；只有缺少会改变拓扑或内容的资料时才询问。无法辨认的名称、译名和状态标为待确认，不编造运营事实。
+用户只提供国家、城市和线路范围时，先查找官方来源，不默认要求其逐站录入或填写绘图坐标。从可获取的来源、用户数据、参考图、现有 SVG 和上下文确定线路顺序、共享站点、支线/环线、需要保留的文字及输出尺寸。沿用明确的约定；只有缺少会改变拓扑或内容的资料时才询问。无法辨认的名称、译名和状态标为待确认，不编造运营事实。
 
 - **已有源驱动绘图项目：** 优先修改它的源数据/布局并重新生成，保留现有几何和图层契约。不要为了使用此 skill 强行迁移项目。
-- **新图或没有生成器：** 使用本 skill 自带的独立 JSON→SVG 工具。从 [assets/minimal-network.json](assets/minimal-network.json) 复制数据模板，按 [references/data-format.md](references/data-format.md) 填写站点坐标、线路与样式。混合交通、支线和环线例子见 [assets/multimodal-network.json](assets/multimodal-network.json)。
+- **城市名称、GTFS 链接/ZIP 或官方网页：** 先阅读 [references/import-guide.md](references/import-guide.md)。优先运营商/主管部门的 GTFS；下载后列举线路并选择实际来源 ID/类型，再指定服务日期导入。没有 GTFS 时由 Agent 从官方页面/API 整理为站序 CSV 或拓扑 JSON，记录 URL、时间、署名和不确定项。
+- **只有站序或拓扑数据：** 使用 `scripts/create_map.py build` 自动生成布局；[虚构 CSV 模板](assets/import-examples/station-sequences.csv) 不需要绘图坐标。保留支线、环线和不同停站模式，同名/邻近节点不自动合并。不同方向占用多个线路 ID 时按来源提供显式分组，避免假换乘。
+- **需要直接精修绘图数据：** 按 [references/data-format.md](references/data-format.md) 编辑已有或生成的 `network.json`。也可复制 [assets/minimal-network.json](assets/minimal-network.json) 手工构图；混合网络示例见 [assets/multimodal-network.json](assets/multimodal-network.json)。
 - **参考图片重绘：** 提取可确认的站序、连接、文字和大体方位，重新构造矢量路径与文字；图片仅作为参考，不作为 SVG 中的位图背景代替重绘。
 
-坐标采用示意布局，不代表经纬度或地理比例。站点 ID 决定身份；同名不同站保留不同 ID，共用一个 ID 才表示同一换乘节点。纯交叉不自动成为换乘。
+来源拓扑中的 `coordinates` 是经纬度；生成后 `point` 是示意画布坐标，不代表地理比例。没有完整坐标时为整张图生成非地理拓扑初稿，并明确标注。站点 ID 决定身份；同名不同站保留不同 ID，共用一个 ID 才表示同一换乘节点。纯交叉不自动成为换乘。
 
 需要行政区、陆地、水域、岛屿或河流时，阅读 [references/basemap-guide.md](references/basemap-guide.md)，先确认来源和跨水关系，再安排底图几何及独立标签。使用独立的自然地理、行政填色/边界和区域标签图层；多面裁切取并集，湖中岛用明确孔洞表达，保持底图低于线路与站名。
+
+## 数据导入与初稿
+
+使用 `create_map.py fetch` 保存公开数据与来源记录，`routes` 列举 GTFS 线路，`build` 导入并生成初稿。命令参数、网页整理步骤、分组及排版覆盖见[导入手册](references/import-guide.md)。每次使用新输出目录，保留原始快照、`topology.json`、生成的 `network.json` 和 `report.json`。
+
+明确服务日期与来源范围；未指定日期时只称 feed 模式集合，不称当前运营。坐标、颜色、站序与换乘来自来源，缺颜色的备用配色要说明；不推断翻译、结构区段或完整换乘。官方来源不可访问时继续查找替代来源，再报告具体缺项，不以失败推断无数据。本版网页整理需要 Agent，未包含全球城市自动数据库或通用 OSM 解析器。
 
 ## 布局与绘制
 
@@ -48,7 +56,7 @@ python3 <skill-dir>/scripts/draw_map.py network.json --output network.svg
 python3 <skill-dir>/scripts/export_png.py network.svg network.png --scale 2
 ```
 
-工具提供圆角路径、按 ID 合并的换乘箭头、结构分段、可编辑文字和独立图层；完整样式示例见 [assets/metro-style-network.json](assets/metro-style-network.json)。布局坐标由 Agent 或使用者编排，不自动求解任意网络排版，也不自动消除重叠。复杂图形可在保持源文件可维护的前提下扩展生成器或直接编写 SVG，不必迁就模板的样式上限。
+工具提供圆角路径、按 ID 合并的换乘箭头、结构分段、可编辑文字和独立图层；完整样式示例见 [assets/metro-style-network.json](assets/metro-style-network.json)。前置生成器提供确定性的初稿坐标、密集站点拉开、共享站间线路错开和标签候选，但不保证任意网络的排版质量。查看报告及渲染图后，将站点、标签、路径修订存入独立 `layout-overrides.json`；底图和结构等深度样式保存在精修后的绘图 JSON 中。复杂图形可在保持源文件可维护的前提下扩展生成器或直接编写 SVG，不必迁就模板的样式上限。
 
 ## 输出范围与后续能力
 
@@ -60,6 +68,6 @@ python3 <skill-dir>/scripts/export_png.py network.svg network.png --scale 2
 
 自带工具只拒绝无效数据，例如重复 ID、未知站点引用、非法坐标；可选 `--check` 只比较 SVG 是否与 JSON 一致，不代表排版通过。PNG 渲染器或字体缺失时交付可用 SVG，并明确未完成的导出/视觉检查。
 
-修改由源数据驱动的 SVG 时，把调整回写源数据再生成。交付源 JSON/布局文件、SVG、所需 PNG、简短复现命令和仍待确认的内容。数据、样式和图面实际有变更时，再补充相应检查，不强制全仓测试。
+修改由源数据驱动的 SVG 时，把调整回写源数据再生成。使用导入流程时，额外检查来源日期/范围、父站归并、方向线路分组及多停站模式，报告中的初稿成功状态不等于图面已验收。交付来源记录、源 JSON/布局覆盖文件、SVG、所需 PNG、简短复现命令和仍待确认的内容。数据、样式和图面实际有变更时，再补充相应检查，不强制全仓测试。
 
 用户要求逐步提交推送时，每个可独立复核的阶段都按明确文件暂存、提交、推送，以推送成功结果为准；仅在推送结果不明确时检查远端状态；已有授权无需重复询问。仅提交本任务文件，不自动创建 PR、合并或发布站点。

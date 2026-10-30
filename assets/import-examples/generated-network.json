@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "title": "站序自动生成示例 / Sequence import example",
+  "subtitle": "Automatic nongeographic topological draft · visual review required",
+  "canvas": {
+    "width": 1400,
+    "height": 950,
+    "background": "#ffffff"
+  },
+  "style": {
+    "label_size": 17,
+    "secondary_size": 12
+  },
+  "stations": [
+    {
+      "id": "central",
+      "name": "中央广场",
+      "point": [
+        90.0,
+        482.5
+      ],
+      "label": {
+        "offset": [
+          0,
+          33
+        ],
+        "anchor": "middle"
+      },
+      "secondary_name": "Central Square"
+    },
+    {
+      "id": "east",
+      "name": "东门",
+      "point": [
+        560.0,
+        145.0
+      ],
+      "label": {
+        "offset": [
+          18,
+          5
+        ],
+        "anchor": "start"
+      },
+      "secondary_name": "East Gate"
+    },
+    {
+      "id": "harbor",
+      "name": "港湾",
+      "point": [
+        560.0,
+        313.75
+      ],
+      "label": {
+        "offset": [
+          0,
+          33
+        ],
+        "anchor": "middle"
+      },
+      "secondary_name": "Harbor"
+    },
+    {
+      "id": "north",
+      "name": "北城",
+      "point": [
+        560.0,
+        482.5
+      ],
+      "label": {
+        "offset": [
+          16,
+          -12
+        ],
+        "anchor": "start"
+      },
+      "secondary_name": "North Town"
+    },
+    {
+      "id": "park",
+      "name": "公园",
+      "point": [
+        1030.0,
+        482.5
+      ],
+      "label": {
+        "offset": [
+          16,
+          -12
+        ],
+        "anchor": "start"
+      },
+      "secondary_name": "Park"
+    },
+    {
+      "id": "south",
+      "name": "南站",
+      "point": [
+        560.0,
+        651.25
+      ],
+      "label": {
+        "offset": [
+          16,
+          -12
+        ],
+        "anchor": "start"
+      },
+      "secondary_name": "South Station"
+    },
+    {
+      "id": "west",
+      "name": "西园",
+      "point": [
+        560.0,
+        820.0
+      ],
+      "label": {
+        "offset": [
+          16,
+          -12
+        ],
+        "anchor": "start"
+      },
+      "secondary_name": "West Park"
+    }
+  ],
+  "routes": [
+    {
+      "id": "blue",
+      "name": "Blue",
+      "color": "#247BA0",
+      "mode": "",
+      "segments": [
+        {
+          "points": [
+            "north",
+            "central",
+            "south"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loop",
+      "name": "Loop",
+      "color": "#63854A",
+      "mode": "",
+      "segments": [
+        {
+          "points": [
+            "east",
+            "park",
+            "harbor"
+          ],
+          "closed": true
+        }
+      ]
+    },
+    {
+      "id": "red",
+      "name": "红线 / Red",
+      "color": "#D8443C",
+      "mode": "",
+      "segments": [
+        {
+          "points": [
+            "central",
+            "harbor"
+          ]
+        },
+        {
+          "points": [
+            "west",
+            "central",
+            "east"
+          ]
+        }
+      ]
+    }
+  ],
+  "legend": {
+    "point": [
+      1120,
+      110
+    ],
+    "width": 250,
+    "title": "Lines"
+  },
+  "annotations": [
+    {
+      "point": [
+        32,
+        920
+      ],
+      "text": "Automatic draft: review station identities, shared tracks and labels.",
+      "size": 12
+    },
+    {
+      "point": [
+        32,
+        898
+      ],
+      "text": "Fictional data for the draw-system-map skill",
+      "size": 12
+    }
+  ],
+  "source_metadata": [
+    {
+      "kind": "local",
+      "file": "station-sequences.csv",
+      "sha256": "471f7c9cfdb14402cc718a94f0c590a8b9e46da5fcedc94cc1fd3fdf7dc30c43",
+      "attribution": "Fictional data for the draw-system-map skill"
+    }
+  ]
+}
