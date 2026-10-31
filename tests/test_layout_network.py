@@ -1,4 +1,5 @@
 import copy
+import math
 from pathlib import Path
 import sys
 import unittest
@@ -58,8 +59,52 @@ class LayoutTests(unittest.TestCase):
         paths=[route['segments'][0]['points'] for route in network['routes']]
         self.assertEqual([x for x in paths[0] if isinstance(x,str)],['a','b'])
         self.assertEqual([x for x in paths[1] if isinstance(x,str)],['b','a'])
-        self.assertNotEqual(paths[0],list(reversed(paths[1])))
-        self.assertTrue(all(isinstance(x,list) for x in paths[0][1:-1]))
+        offsets = [route['segments'][0]['station_offsets'] for route in network['routes']]
+        self.assertNotEqual(offsets[0], offsets[1])
+        self.assertAlmostEqual(math.dist(offsets[0]['a'], offsets[1]['a']), 9, places=3)
+
+    def test_invalid_lane_offset_overrides_fail_with_actionable_value_errors(self):
+        data=self.topology();network,_=layout(data)
+        original=next(r for r in network['routes'] if r['id']=='red')['segments']
+        for invalid in [[], {'central':[1]}, {'central':None}, {'unknown':[1,2]}]:
+            with self.subTest(offsets=invalid):
+                segments=copy.deepcopy(original)
+                segments[0]['station_offsets']=invalid
+                with self.assertRaises(ValueError):
+                    layout(data,{'routes':{'red':{'segments':segments}}})
+
+    def test_bilingual_labels_clear_enlarged_transfer_markers_and_tracks(self):
+        _,report=layout(self.topology())
+        self.assertEqual(report['estimated_label_station_conflicts'],[])
+        self.assertEqual(report['estimated_label_route_conflicts'],[])
+        self.assertEqual(report['estimated_label_conflicts'],[])
+
+    def test_service_subsets_share_display_geometry_but_retain_source_patterns(self):
+        data={'schema_version':1,'title':'Services','sources':[],
+              'stations':[{'id':s,'name':s,'coordinates':[10+i,20]} for i,s in enumerate('abcd')],
+              'routes':[{'id':'r','name':'R','patterns':[
+                  {'id':'all','station_ids':list('abcd')},
+                  {'id':'express','station_ids':list('acd')},
+                  {'id':'short','station_ids':list('cb')}]}]}
+        before=copy.deepcopy(data)
+        network,report=layout(data)
+        self.assertEqual(data,before)
+        self.assertEqual(len(network['routes'][0]['segments']),1)
+        self.assertEqual([p['service_subset'] for p in report['pattern_segments']['r']],[False,True,True])
+        self.assertEqual([p for p in network['routes'][0]['segments'][0]['points'] if isinstance(p,str)],list('abcd'))
+
+    def test_fictional_ring_has_no_overlapping_nonadjacent_legs(self):
+        from schematic_layout import _overlap_length
+        network,_=layout(self.topology())
+        positions={s['id']:s['point'] for s in network['stations']}
+        segment=next(r for r in network['routes'] if r['id']=='loop')['segments'][0]
+        offsets=segment.get('station_offsets',{})
+        vertices=[[positions[p][i]+offsets.get(p,[0,0])[i] for i in (0,1)] if isinstance(p,str) else p
+                  for p in segment['points']]
+        edges=list(zip(vertices,vertices[1:]+vertices[:1]))
+        for i,(a,b) in enumerate(edges):
+            for c,d in edges[i+1:]:
+                self.assertLess(_overlap_length(a,b,c,d),.001)
 
     def test_explicit_grouping_prevents_direction_ids_from_becoming_fake_lines(self):
         data=self.topology();red=next(r for r in data['routes'] if r['id']=='red')

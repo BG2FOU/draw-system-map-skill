@@ -91,7 +91,7 @@
 <circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>
 </g>
 <g data-station="central" data-status="open" transform="translate(440 300)"><title>市中心</title>
-<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#b96354" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#b96354"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#347e9a" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#347e9a"/>
+<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" transform="rotate(0) scale(1)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#b96354" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(0) scale(1)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#b96354"/><path class="transfer-arrow" transform="rotate(180) scale(1)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#347e9a" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(180) scale(1)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#347e9a"/>
 </g>
 <g data-station="bank" data-status="open" transform="translate(560 300)"><title>西岸</title>
 <circle r="5.5" fill="#ffffff" stroke="#b96354" stroke-width="2.5"/>

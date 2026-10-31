@@ -5,64 +5,64 @@
 <g font-family="Noto Sans CJK SC, Microsoft YaHei, sans-serif" fill="#243746">
 <g id="regions">
 </g><g id="routes">
-<g data-route="blue" data-mode=""><title>Blue</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M560 482.5 L90 482.5 L560 651.25" fill="none" stroke="#247BA0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
-<g data-route="loop" data-mode=""><title>Loop</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M560 145 L1030 482.5 L560 313.75 L560 145 Z" fill="none" stroke="#63854A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
-<g data-route="red" data-mode=""><title>红线 / Red</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M90 482.5 L560 313.75" fill="none" stroke="#D8443C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="unspecified"><path d="M560 820 L90 482.5 L560 145" fill="none" stroke="#D8443C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="blue" data-mode=""><title>Blue</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M612 653 L420 461 L420 749" fill="none" stroke="#247BA0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="loop" data-mode=""><title>Loop</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M660 221 L798.7279 359.7279 A18 18 0 0 0 811.4558 365 L900 365 L833.2721 431.7279 A18 18 0 0 1 820.5442 437 L684 437 L665.2721 418.2721 A18 18 0 0 1 660 405.5442 L660 221 Z" fill="none" stroke="#63854A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
+<g data-route="red" data-mode=""><title>红线 / Red</title><g data-track-layer="outline"><g data-segment="0" data-structure="unspecified"><path d="M420 461 L652.5442 461 A18 18 0 0 0 665.2721 455.7279 L684 437" fill="none" stroke="#D8443C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g><g data-segment="1" data-structure="unspecified"><path d="M180 701 L420 461 L660 221" fill="none" stroke="#D8443C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></g><g data-track-layer="core"></g></g>
 </g><g id="stations">
-<g data-station="central" data-status="open" transform="translate(90 482.5)"><title>中央广场</title>
-<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#247BA0" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#247BA0"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#D8443C"/>
+<g data-station="central" data-status="open" transform="translate(420 461)"><title>中央广场</title>
+<circle r="22.4" fill="#ffffff"/><path class="transfer-arrow" transform="rotate(0) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#247BA0" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(0) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#247BA0"/><path class="transfer-arrow" transform="rotate(180) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#D8443C" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(180) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#D8443C"/>
 </g>
-<g data-station="east" data-status="open" transform="translate(560 145)"><title>东门</title>
-<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#63854A" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#63854A"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#D8443C"/>
+<g data-station="east" data-status="open" transform="translate(660 221)"><title>东门</title>
+<circle r="22.4" fill="#ffffff"/><path class="transfer-arrow" transform="rotate(0) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#63854A" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(0) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#63854A"/><path class="transfer-arrow" transform="rotate(180) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#D8443C" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(180) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#D8443C"/>
 </g>
-<g data-station="harbor" data-status="open" transform="translate(560 313.75)"><title>港湾</title>
-<circle r="17.5" fill="#ffffff"/><path class="transfer-arrow" d="M10.8253 -6.25 A12.5 12.5 0 0 0 -10.8253 -6.25" fill="none" stroke="#63854A" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M-12.5753 -3.2189 L-12.3564 -10.5981 L-6.2942 -7.0981 Z" fill="#63854A"/><path class="transfer-arrow" d="M-10.8253 6.25 A12.5 12.5 0 0 0 10.8253 6.25" fill="none" stroke="#D8443C" stroke-width="3.5" stroke-linecap="round"/><path class="transfer-head" d="M12.5753 3.2189 L12.3564 10.5981 L6.2942 7.0981 Z" fill="#D8443C"/>
+<g data-station="harbor" data-status="open" transform="translate(684 437)"><title>港湾</title>
+<circle r="22.4" fill="#ffffff"/><path class="transfer-arrow" transform="rotate(0) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#63854A" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(0) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#63854A"/><path class="transfer-arrow" transform="rotate(180) scale(1.28)" d="M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25" fill="none" stroke="#D8443C" stroke-width="4.5" stroke-linecap="round"/><path class="transfer-head" transform="rotate(180) scale(1.28)" d="M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z" fill="#D8443C"/>
 </g>
-<g data-station="north" data-status="open" transform="translate(560 482.5)"><title>北城</title>
+<g data-station="north" data-status="open" transform="translate(612 653)"><title>北城</title>
 <circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
 </g>
-<g data-station="park" data-status="open" transform="translate(1030 482.5)"><title>公园</title>
+<g data-station="park" data-status="open" transform="translate(900 365)"><title>公园</title>
 <circle r="5.5" fill="#ffffff" stroke="#63854A" stroke-width="2.5"/>
 </g>
-<g data-station="south" data-status="open" transform="translate(560 651.25)"><title>南站</title>
+<g data-station="south" data-status="open" transform="translate(420 749)"><title>南站</title>
 <circle r="5.5" fill="#ffffff" stroke="#247BA0" stroke-width="2.5"/>
 </g>
-<g data-station="west" data-status="open" transform="translate(560 820)"><title>西园</title>
+<g data-station="west" data-status="open" transform="translate(180 701)"><title>西园</title>
 <circle r="5.5" fill="#ffffff" stroke="#D8443C" stroke-width="2.5"/>
 </g>
 </g><g id="labels">
-<text data-label="central" x="90" y="515.5" text-anchor="middle" font-size="17"><tspan x="90">中央广场</tspan>
-<tspan x="90" dy="16" font-size="12">Central Square</tspan>
+<text data-label="central" x="387" y="466" text-anchor="end" font-size="17"><tspan x="387">中央广场</tspan>
+<tspan x="387" dy="16" font-size="12">Central Square</tspan>
 </text>
-<text data-label="east" x="578" y="150" text-anchor="start" font-size="17"><tspan x="578">东门</tspan>
-<tspan x="578" dy="16" font-size="12">East Gate</tspan>
+<text data-label="east" x="693" y="209" text-anchor="start" font-size="17"><tspan x="693">东门</tspan>
+<tspan x="693" dy="16" font-size="12">East Gate</tspan>
 </text>
-<text data-label="harbor" x="560" y="346.75" text-anchor="middle" font-size="17"><tspan x="560">港湾</tspan>
-<tspan x="560" dy="16" font-size="12">Harbor</tspan>
+<text data-label="harbor" x="717" y="464" text-anchor="start" font-size="17"><tspan x="717">港湾</tspan>
+<tspan x="717" dy="16" font-size="12">Harbor</tspan>
 </text>
-<text data-label="north" x="576" y="470.5" text-anchor="start" font-size="17"><tspan x="576">北城</tspan>
-<tspan x="576" dy="16" font-size="12">North Town</tspan>
+<text data-label="north" x="629" y="641" text-anchor="start" font-size="17"><tspan x="629">北城</tspan>
+<tspan x="629" dy="16" font-size="12">North Town</tspan>
 </text>
-<text data-label="park" x="1046" y="470.5" text-anchor="start" font-size="17"><tspan x="1046">公园</tspan>
-<tspan x="1046" dy="16" font-size="12">Park</tspan>
+<text data-label="park" x="917" y="353" text-anchor="start" font-size="17"><tspan x="917">公园</tspan>
+<tspan x="917" dy="16" font-size="12">Park</tspan>
 </text>
-<text data-label="south" x="576" y="639.25" text-anchor="start" font-size="17"><tspan x="576">南站</tspan>
-<tspan x="576" dy="16" font-size="12">South Station</tspan>
+<text data-label="south" x="437" y="737" text-anchor="start" font-size="17"><tspan x="437">南站</tspan>
+<tspan x="437" dy="16" font-size="12">South Station</tspan>
 </text>
-<text data-label="west" x="576" y="808" text-anchor="start" font-size="17"><tspan x="576">西园</tspan>
-<tspan x="576" dy="16" font-size="12">West Park</tspan>
+<text data-label="west" x="197" y="706" text-anchor="start" font-size="17"><tspan x="197">西园</tspan>
+<tspan x="197" dy="16" font-size="12">West Park</tspan>
 </text>
 </g><g id="heading">
 <text x="32" y="48" font-size="30" font-weight="700">站序自动生成示例 / Sequence import example</text>
-<text x="32" y="77" font-size="16">Automatic nongeographic topological draft · visual review required</text>
+<text x="32" y="77" font-size="16">Octilinear nongeographic topological draft · visual review required</text>
 </g>
 <g id="legend" transform="translate(1120 110)"><rect width="250" height="172" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
 <text x="16" y="27" font-size="17">Lines</text>
-<path d="M16 50 H62" fill="none" stroke="#247BA0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 50 H62" fill="none" stroke="#247BA0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="76" y="55" font-size="14">Blue</text>
-<path d="M16 90 H62" fill="none" stroke="#63854A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 90 H62" fill="none" stroke="#63854A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="76" y="95" font-size="14">Loop</text>
-<path d="M16 130 H62" fill="none" stroke="#D8443C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 130 H62" fill="none" stroke="#D8443C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="76" y="135" font-size="14">红线 / Red</text>
 </g>
 <g id="annotations">

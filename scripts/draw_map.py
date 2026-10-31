@@ -127,24 +127,39 @@ def marker(colors, radius, reserved, interchange_style, background, reserved_col
     if len(colors) <= 1:
         dash = ' stroke-dasharray="3 2"' if reserved else ""
         return f'<circle r="{fmt(radius)}" fill="{background}" stroke="{colors[0] if colors else reserved_color}" stroke-width="2.5"{dash}/>'
-    parts = [f'<circle r="{fmt(radius + 5)}" fill="{background}"/>']
+    parts = [f'<circle r="{fmt(radius * 1.4 if interchange_style == "arrows" else radius + 5)}" fill="{background}"/>']
     for i, stroke in enumerate(colors):
         if interchange_style == "ring":
             a, b = i * math.tau / len(colors) - math.pi / 2, (i + 1) * math.tau / len(colors) - math.pi / 2
             start, end = (radius * math.cos(a), radius * math.sin(a)), (radius * math.cos(b), radius * math.sin(b))
             parts.append(f'<path class="transfer-ring" d="M{xy(start)} A{fmt(radius)} {fmt(radius)} 0 0 1 {xy(end)}" fill="none" stroke="{stroke}" stroke-width="3.5"/>')
+        elif len(colors) in (2, 3):
+            # Reference geometry from the completed planning/BRT maps: open
+            # half/third arrows with a substantial head and proportional stroke.
+            scale = radius / 12.5
+            if len(colors) == 2:
+                arc = "M10.82532 -6.25 A12.5 12.5 0 0 0 -10.82532 -6.25"
+                head = "M-14.54923 -8.4 L-14.82532 .6782 L-7.10141 -4.1 Z"
+            else:
+                arc = "M10.82532 -6.25 A12.5 12.5 0 0 0 -6.25 -10.82532"
+                head = "M-3 -16 L-11 -9 L-1 -7 Z"
+            transform = f'rotate({fmt(i * 360 / len(colors))}) scale({fmt(scale)})'
+            parts.append(f'<path class="transfer-arrow" transform="{transform}" d="{arc}" fill="none" stroke="{stroke}" stroke-width="4.5" stroke-linecap="round"/>')
+            parts.append(f'<path class="transfer-head" transform="{transform}" d="{head}" fill="{stroke}"/>')
         else:
+            # Keep a visible opening at each sector for four or more lines.
             center = -math.pi / 2 + i * math.tau / len(colors)
-            sweep = math.radians(120) if len(colors) == 2 else math.tau / len(colors) * .7
+            sweep = math.tau / len(colors) * .63
             a, b = center + sweep / 2, center - sweep / 2
             start, end = (radius * math.cos(a), radius * math.sin(a)), (radius * math.cos(b), radius * math.sin(b))
+            scale = radius / 12.5 * min(1, 3 / len(colors))
             tangent = (math.sin(b), -math.cos(b))
             normal = (-tangent[1], tangent[0])
-            tip = (end[0] + tangent[0] * 3.5, end[1] + tangent[1] * 3.5)
-            base = (end[0] - tangent[0] * 3, end[1] - tangent[1] * 3)
-            left = (base[0] + normal[0] * 3.5, base[1] + normal[1] * 3.5)
-            right = (base[0] - normal[0] * 3.5, base[1] - normal[1] * 3.5)
-            parts.append(f'<path class="transfer-arrow" d="M{xy(start)} A{fmt(radius)} {fmt(radius)} 0 0 0 {xy(end)}" fill="none" stroke="{stroke}" stroke-width="3.5" stroke-linecap="round"/>')
+            tip = (end[0] + tangent[0] * 4.5 * scale, end[1] + tangent[1] * 4.5 * scale)
+            base = (end[0] - tangent[0] * 3.5 * scale, end[1] - tangent[1] * 3.5 * scale)
+            left = (base[0] + normal[0] * 4.5 * scale, base[1] + normal[1] * 4.5 * scale)
+            right = (base[0] - normal[0] * 4.5 * scale, base[1] - normal[1] * 4.5 * scale)
+            parts.append(f'<path class="transfer-arrow" d="M{xy(start)} A{fmt(radius)} {fmt(radius)} 0 0 0 {xy(end)}" fill="none" stroke="{stroke}" stroke-width="{fmt(4.5 * scale)}" stroke-linecap="round"/>')
             parts.append(f'<path class="transfer-head" d="M{xy(tip)} L{xy(left)} L{xy(right)} Z" fill="{stroke}"/>')
     return "".join(parts)
 
@@ -220,12 +235,30 @@ def render(data):
             vertices = array(segment.get("points"), f"{rid}.points")
             if len(vertices) < 2:
                 raise MapError(f"{rid}: a segment needs at least two points")
+            offset_where = f"{rid}.segments[{index}].station_offsets"
+            offsets = obj(segment.get("station_offsets", {}), offset_where)
+            referenced_stations = {vertex for vertex in vertices if isinstance(vertex, str)}
+            checked_offsets = {}
+            for sid, value in offsets.items():
+                text(sid, f"{offset_where} station ID")
+                if sid not in stations:
+                    raise MapError(f"{offset_where}: unknown station ID {sid!r}")
+                if sid not in referenced_stations:
+                    raise MapError(f"{offset_where}: station {sid!r} is not referenced by this segment's points")
+                checked_offsets[sid] = point(value, f"{offset_where}.{sid}")
             points, flags = [], []
             for vertex in vertices:
                 if isinstance(vertex, str):
                     if vertex not in stations:
                         raise MapError(f"{rid}: unknown station ID {vertex!r}")
-                    points.append(point(stations[vertex]["point"], vertex))
+                    center = point(stations[vertex]["point"], vertex)
+                    if vertex in checked_offsets:
+                        dx, dy = checked_offsets[vertex]
+                        # Only the track moves: its station reference still determines
+                        # membership, while markers and labels use the original center.
+                        points.append(point([center[0] + dx, center[1] + dy], f"{offset_where}.{vertex} resulting point"))
+                    else:
+                        points.append(center)
                     flags.append(True)
                     if rid not in [r[0] for r in members[vertex]]:
                         members[vertex].append((rid, stroke))

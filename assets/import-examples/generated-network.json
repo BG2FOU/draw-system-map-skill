@@ -1,7 +1,7 @@
 {
   "version": 1,
   "title": "站序自动生成示例 / Sequence import example",
-  "subtitle": "Automatic nongeographic topological draft · visual review required",
+  "subtitle": "Octilinear nongeographic topological draft · visual review required",
   "canvas": {
     "width": 1400,
     "height": 950,
@@ -9,22 +9,25 @@
   },
   "style": {
     "label_size": 17,
-    "secondary_size": 12
+    "secondary_size": 12,
+    "route_width": 7,
+    "corner_radius": 18,
+    "interchange_radius": 16
   },
   "stations": [
     {
       "id": "central",
       "name": "中央广场",
       "point": [
-        90.0,
-        482.5
+        420.0,
+        461.0
       ],
       "label": {
         "offset": [
-          0,
-          33
+          -33,
+          5
         ],
-        "anchor": "middle"
+        "anchor": "end"
       },
       "secondary_name": "Central Square"
     },
@@ -32,13 +35,13 @@
       "id": "east",
       "name": "东门",
       "point": [
-        560.0,
-        145.0
+        660.0,
+        221.0
       ],
       "label": {
         "offset": [
-          18,
-          5
+          33,
+          -12
         ],
         "anchor": "start"
       },
@@ -48,15 +51,15 @@
       "id": "harbor",
       "name": "港湾",
       "point": [
-        560.0,
-        313.75
+        684.0,
+        437.0
       ],
       "label": {
         "offset": [
-          0,
-          33
+          33,
+          27
         ],
-        "anchor": "middle"
+        "anchor": "start"
       },
       "secondary_name": "Harbor"
     },
@@ -64,12 +67,12 @@
       "id": "north",
       "name": "北城",
       "point": [
-        560.0,
-        482.5
+        612.0,
+        653.0
       ],
       "label": {
         "offset": [
-          16,
+          17,
           -12
         ],
         "anchor": "start"
@@ -80,12 +83,12 @@
       "id": "park",
       "name": "公园",
       "point": [
-        1030.0,
-        482.5
+        900.0,
+        365.0
       ],
       "label": {
         "offset": [
-          16,
+          17,
           -12
         ],
         "anchor": "start"
@@ -96,12 +99,12 @@
       "id": "south",
       "name": "南站",
       "point": [
-        560.0,
-        651.25
+        420.0,
+        749.0
       ],
       "label": {
         "offset": [
-          16,
+          17,
           -12
         ],
         "anchor": "start"
@@ -112,13 +115,13 @@
       "id": "west",
       "name": "西园",
       "point": [
-        560.0,
-        820.0
+        180.0,
+        701.0
       ],
       "label": {
         "offset": [
-          16,
-          -12
+          17,
+          5
         ],
         "anchor": "start"
       },
@@ -150,8 +153,20 @@
         {
           "points": [
             "east",
+            [
+              804.0,
+              365.0
+            ],
             "park",
-            "harbor"
+            [
+              828.0,
+              437.0
+            ],
+            "harbor",
+            [
+              660.0,
+              413.0
+            ]
           ],
           "closed": true
         }
@@ -166,6 +181,10 @@
         {
           "points": [
             "central",
+            [
+              660.0,
+              461.0
+            ],
             "harbor"
           ]
         },

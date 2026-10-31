@@ -14,6 +14,8 @@ from collections import defaultdict, deque
 
 from network_topology import validate_topology
 from draw_map import color, point, render
+from schematic_layout import schematic_layout, _octilinear
+from parallel_tracks import route_geometry
 
 PALETTE = ("#D8443C", "#247BA0", "#238B57", "#9A55A2", "#D17B14", "#6B6DB4", "#008A91", "#A65F49")
 
@@ -132,68 +134,6 @@ def _separate_equal_points(positions, frame):
     return shifted
 
 
-def _spread_dense_points(positions, frame):
-    """Separate dense schematic markers while keeping a weak geographic anchor."""
-    original = copy.deepcopy(positions)
-    ids = sorted(positions)
-    for _ in range(100):
-        movement = {sid: [0., 0.] for sid in ids}
-        for i, sid in enumerate(ids):
-            for other in ids[i + 1:]:
-                dx, dy = positions[sid][0] - positions[other][0], positions[sid][1] - positions[other][1]
-                distance = math.hypot(dx, dy)
-                if distance < 64:
-                    if distance < .001:
-                        dx, dy, distance = 1., 0., 1.
-                    force = (64 - distance) * .26
-                    for axis, delta in enumerate((dx, dy)):
-                        movement[sid][axis] += delta / distance * force
-                        movement[other][axis] -= delta / distance * force
-        for sid in ids:
-            for axis in (0, 1):
-                step = movement[sid][axis] + (original[sid][axis] - positions[sid][axis]) * .015
-                positions[sid][axis] = max(frame[axis], min(frame[axis + 2], positions[sid][axis] + step))
-    for sid in ids:
-        positions[sid] = [round(value, 4) for value in positions[sid]]
-    return [{"station_id": sid, "distance": round(math.dist(original[sid], positions[sid]), 2)}
-            for sid in ids if math.dist(original[sid], positions[sid]) > 1]
-
-
-def _offset_shared_tracks(drawing_routes, positions, edge_routes, route_overrides):
-    count = 0
-    for route in drawing_routes:
-        if "segments" in route_overrides.get(route["id"], {}):
-            continue  # User geometry always wins.
-        for segment in route["segments"]:
-            stations = segment["points"]
-            points = []
-            pairs = list(zip(stations, stations[1:]))
-            if segment.get("closed"):
-                pairs.append((stations[-1], stations[0]))
-            for a, b in pairs:
-                points.append(a)
-                key = tuple(sorted((a, b)))
-                members = sorted(edge_routes[key])
-                if len(members) < 2:
-                    continue
-                start, end = positions[key[0]], positions[key[1]]
-                dx, dy = end[0] - start[0], end[1] - start[1]
-                distance = math.hypot(dx, dy)
-                if not distance:
-                    continue
-                offset = (members.index(route["id"]) - (len(members) - 1) / 2) * 11
-                if offset:
-                    x, y = positions[a]; bx, by = positions[b]
-                    for fraction in (.22, .78):
-                        points.append([round(x + (bx-x)*fraction - dy/distance*offset, 4),
-                                       round(y + (by-y)*fraction + dx/distance*offset, 4)])
-                    count += 1
-            if not segment.get("closed"):
-                points.append(stations[-1])
-            segment["points"] = points
-    return count
-
-
 def _text_width(value, size):
     return max(size * .6, sum(0 if unicodedata.combining(c) else
                              1 if unicodedata.east_asian_width(c) in "WF" else .58
@@ -209,6 +149,11 @@ def _label_box(station, position, label):
 
 def _overlap(a, b):
     return max(0, min(a[2], b[2]) - max(a[0], b[0])) * max(0, min(a[3], b[3]) - max(a[1], b[1]))
+
+
+def _point_box_distance(p, box):
+    return math.hypot(max(box[0] - p[0], 0, p[0] - box[2]),
+                      max(box[1] - p[1], 0, p[1] - box[3]))
 
 
 def _line_box(a, b, box):
@@ -232,24 +177,38 @@ def _line_box(a, b, box):
 
 
 def _segments(route, override):
-    segments, patterns, seen = [], [], {}
-    for pattern in sorted(route["patterns"], key=lambda p: p["id"]):
+    def contained(short, long):
+        if short[0] == short[-1] or long[0] == long[-1]:
+            return tuple(short) in (tuple(long), tuple(reversed(long)))
+        def subsequence(needle, haystack):
+            iterator = iter(haystack)
+            return all(any(item == sid for item in iterator) for sid in needle)
+        return subsequence(short, long) or subsequence(short, reversed(long))
+
+    kept = []
+    for pattern in sorted(route["patterns"], key=lambda p: (-len(p["station_ids"]), p["id"])):
         sequence = pattern["station_ids"]
         if any(a == b for a, b in zip(sequence, sequence[1:])):
             raise ValueError(f"Route {route['id']}, pattern {pattern['id']}: consecutive identical stations cannot be drawn")
-        key = min(tuple(sequence), tuple(reversed(sequence)))
-        if key not in seen:
-            closed = sequence[0] == sequence[-1] and len(set(sequence)) >= 3
-            seen[key] = len(segments)
-            segments.append({"points": list(sequence[:-1] if closed else sequence), **({"closed": True} if closed else {})})
-        patterns.append({"pattern_id": pattern["id"], "segment_index": seen[key]})
+        if not any(contained(sequence, other["station_ids"]) for other in kept):
+            kept.append(pattern)
+    kept.sort(key=lambda p: p["id"])
+    segments, patterns = [], []
+    for pattern in kept:
+        sequence = pattern["station_ids"]
+        closed = sequence[0] == sequence[-1] and len(set(sequence)) >= 3
+        segments.append({"points": list(sequence[:-1] if closed else sequence), **({"closed": True} if closed else {})})
+    for pattern in sorted(route["patterns"], key=lambda p: p["id"]):
+        index = next(i for i, other in enumerate(kept) if contained(pattern["station_ids"], other["station_ids"]))
+        patterns.append({"pattern_id": pattern["id"], "segment_index": index,
+                         "service_subset": len(pattern["station_ids"]) < len(kept[index]["station_ids"])})
     if "segments" in override:
         supplied = override["segments"]
         if not isinstance(supplied, list) or len(supplied) != len(segments):
             raise ValueError(f"routes.{route['id']}.segments: retain exactly {len(segments)} displayed segments")
         for index, (original, replacement) in enumerate(zip(segments, supplied)):
             where = f"routes.{route['id']}.segments[{index}]"
-            _keys(replacement, {"points", "closed"}, where)
+            _keys(replacement, {"points", "closed", "station_offsets"}, where)
             vertices = replacement.get("points")
             if not isinstance(vertices, list):
                 raise ValueError(f"{where}.points: expected an array")
@@ -258,6 +217,12 @@ def _segments(route, override):
             closed = replacement.get("closed", False)
             if not isinstance(closed, bool) or closed != original.get("closed", False):
                 raise ValueError(f"{where}.closed: retain the generated loop setting")
+            offsets = replacement.get("station_offsets", {})
+            _object(offsets, f"{where}.station_offsets")
+            if set(offsets) - set(original["points"]):
+                raise ValueError(f"{where}.station_offsets: use stations referenced by this segment")
+            for sid, offset in offsets.items():
+                point(offset, f"{where}.station_offsets.{sid}")
             for vertex in vertices:
                 if not isinstance(vertex, str):
                     point(vertex, where)
@@ -290,26 +255,33 @@ def layout(topology, overrides=None):
     width, height = _dimension(canvas["width"], "canvas.width", 800), _dimension(canvas["height"], "canvas.height", max(600, len(routes) * 40 + 230))
     color(canvas["background"])
     frame = (90, 145, width - 370, height - 130)
-    label_frame = (32, 100, width - 310, height - 80)
     adjacency, membership, edge_routes = {sid: set() for sid in by_id}, defaultdict(set), defaultdict(set)
     for route in routes:
         for pattern in route["patterns"]:
             for sid in pattern["station_ids"]:
                 membership[sid].add(route["id"])
-            for a, b in zip(pattern["station_ids"], pattern["station_ids"][1:]):
+        for segment in _segments(route, {})[0]:
+            sequence = segment["points"]
+            pairs = list(zip(sequence, sequence[1:]))
+            if segment.get("closed"):
+                pairs.append((sequence[-1], sequence[0]))
+            for a, b in pairs:
                 adjacency[a].add(b)
                 adjacency[b].add(a)
                 edge_routes[tuple(sorted((a, b)))].add(route["id"])
     geographic = all(s.get("coordinates") is not None for s in stations)
     method = "geographic" if geographic else "topological"
-    positions = _fit(_geographic(stations) if geographic else _topological(adjacency), frame)
-    shifted = _separate_equal_points(positions, frame)
-    spread = _spread_dense_points(positions, frame) if geographic else []
+    reference = _fit(_geographic(stations) if geographic else _topological(adjacency), frame)
+    shifted = _separate_equal_points(reference, frame)
+    positions, edge_paths, schematic_report = schematic_layout(
+        adjacency, reference, geographic, canvas, canvas_overrides,
+        label_margin=min(420, max(_text_width(s["name"], 17) for s in stations) + 30))
+    width, height = canvas["width"], canvas["height"]
+    label_frame = (32, 100, width - 32, height - 80)
     warnings = list(data.get("warnings", []))
     if not geographic:
         warnings.append("Some stations lack coordinates: the entire map uses a nongeographic topological draft.")
-    if spread:
-        warnings.append("Dense station positions were spread for readability; this schematic is not to geographic scale.")
+    warnings.append("Stations follow octilinear corridors; source coordinates guide broad direction, not geographic scale.")
     if shifted:
         warnings.append("Coincident source positions were separated for drawing; station identities were kept distinct.")
     if data.get("transfers"):
@@ -341,26 +313,46 @@ def layout(topology, overrides=None):
                                "mode": route.get("mode", ""), "segments": segments})
     if fallback_colors:
         warnings.append("Some routes have no source color: fallback palette colors are drawing choices, not official colors.")
-    offset_count = _offset_shared_tracks(drawing_routes, positions, edge_routes, route_overrides)
+    moved = {sid for sid, entry in station_overrides.items() if "point" in entry}
+    for a, b in list(edge_paths):
+        if a in moved or b in moved:
+            if a < b:
+                path = _octilinear(positions[a], positions[b])[0]
+                edge_paths[(a, b)] = path
+                edge_paths[(b, a)] = list(reversed(path))
+    lane_report = route_geometry(drawing_routes, positions, edge_paths, route_overrides)
+    warnings.extend(lane_report.get("warnings", []))
+    offset_count = lane_report["offset_shared_segments"]
     lines = []
     for route in drawing_routes:
         for segment in route["segments"]:
-            vertices = [positions[v] if isinstance(v, str) else v for v in segment["points"]]
+            offsets = segment.get("station_offsets", {})
+            vertices = [[positions[v][i] + offsets.get(v, [0, 0])[i] for i in (0, 1)]
+                        if isinstance(v, str) else v for v in segment["points"]]
             if segment.get("closed"):
                 vertices = [*vertices, vertices[0]]
             if any(tuple(a) == tuple(b) for a, b in zip(vertices, vertices[1:])):
                 raise ValueError(f"Route {route['id']}: consecutive drawing points coincide; adjust station or waypoint overrides")
             lines.extend((a, b, route["id"]) for a, b in zip(vertices, vertices[1:]))
-    marker_boxes = {sid: (p[0] - (18 if len(membership[sid]) > 1 else 7), p[1] - (18 if len(membership[sid]) > 1 else 7),
-                          p[0] + (18 if len(membership[sid]) > 1 else 7), p[1] + (18 if len(membership[sid]) > 1 else 7))
+    marker_boxes = {sid: (p[0] - (23 if len(membership[sid]) > 1 else 7), p[1] - (23 if len(membership[sid]) > 1 else 7),
+                          p[0] + (23 if len(membership[sid]) > 1 else 7), p[1] + (23 if len(membership[sid]) > 1 else 7))
                     for sid, p in positions.items()}
     boxes = {sid: _label_box(by_id[sid], positions[sid], label) for sid, label in labels.items()}
-    candidates = [([16, -12], "start"), ([18, 5], "start"), ([16, 27], "start"), ([0, 33], "middle"),
-                  ([-16, 27], "end"), ([-18, 5], "end"), ([-16, -12], "end"), ([0, -24], "middle"),
-                  ([16, -40], "start"), ([-16, -40], "end"), ([16, 50], "start"), ([-16, 50], "end")]
     for sid in sorted(by_id, key=lambda s: (-len(membership[s]), -len(adjacency[s]), s)):
         if sid in labels:
             continue
+        radius = 23 if len(membership[sid]) > 1 else 7
+        dx = radius + 10
+        above = -radius - (20 if by_id[sid].get("secondary_name") else 4) - 8
+        below = radius + 15 + 8
+        candidates = [([dx, -12], "start"), ([dx, 5], "start"), ([dx, 27], "start"),
+                      ([0, below], "middle"), ([-dx, 27], "end"), ([-dx, 5], "end"),
+                      ([-dx, -12], "end"), ([0, above], "middle"),
+                      ([dx, above - 16], "start"), ([-dx, above - 16], "end"),
+                      ([dx, below + 28], "start"), ([-dx, below + 28], "end"),
+                      ([0, below + 28], "middle"), ([0, above - 28], "middle"),
+                      ([16, above], "start"), ([-16, above], "end"),
+                      ([16, below], "start"), ([-16, below], "end")]
         options = []
         for index, (offset, align) in enumerate(candidates):
             label = {"offset": list(offset), "anchor": align}
@@ -368,8 +360,13 @@ def layout(topology, overrides=None):
             area = (box[2] - box[0]) * (box[3] - box[1])
             outside = area - _overlap(box, label_frame)
             score = outside * 20 + sum(_overlap(box, other) * 3 for other in boxes.values())
+            score += _overlap(box, (width - 290, 100, width - 20, 175 + len(routes) * 40)) * 20
             score += sum(1000 + _overlap(box, other) * 5 for other in marker_boxes.values() if _overlap(box, other))
             score += sum(250 for a, b, _ in lines if _line_box(a, b, box))
+            own_distance = _point_box_distance(positions[sid], box)
+            nearest_other = min((_point_box_distance(p, box) for other, p in positions.items() if other != sid), default=own_distance)
+            if nearest_other + 8 < own_distance:
+                score += 600 + (own_distance - nearest_other) * 20
             options.append((score, index, label, box))
         _, _, labels[sid], boxes[sid] = min(options, key=lambda option: option[:2])
     label_conflicts, near_stations, outside_labels = [], [], []
@@ -382,9 +379,14 @@ def layout(topology, overrides=None):
             if _overlap(box, boxes[other]):
                 label_conflicts.append({"station_ids": [sid, other]})
             distance = math.dist(positions[sid], positions[other])
-            threshold = (18 if len(membership[sid]) > 1 else 7) + (18 if len(membership[other]) > 1 else 7) + 8
+            threshold = (23 if len(membership[sid]) > 1 else 7) + (23 if len(membership[other]) > 1 else 7) + 8
             if distance < threshold:
                 near_stations.append({"station_ids": [sid, other], "distance": round(distance, 2)})
+    ambiguous_labels = [{"station_id": sid, "closer_station_ids": [
+        other for other in station_ids if other != sid and
+        _point_box_distance(positions[other], boxes[sid]) + 8 < _point_box_distance(positions[sid], boxes[sid])]}
+        for sid in station_ids]
+    ambiguous_labels = [row for row in ambiguous_labels if row["closer_station_ids"]]
     station_label_conflicts = [{"label_station_id": sid, "marker_station_id": other}
                                for sid in station_ids for other in station_ids if _overlap(boxes[sid], marker_boxes[other])]
     route_label_conflicts = [{"station_id": sid, "route_ids": sorted({rid for a, b, rid in lines if _line_box(a, b, boxes[sid])})}
@@ -395,8 +397,8 @@ def layout(topology, overrides=None):
     if shared_edges:
         warnings.append("Shared-edge lanes were separated where possible; inspect junctions, curves and any manually overridden tracks.")
     network = {"version": 1, "title": data["title"],
-               "subtitle": f"Automatic {'geographic' if geographic else 'nongeographic topological'} draft · visual review required",
-               "canvas": canvas, "style": {"label_size": 17, "secondary_size": 12},
+               "subtitle": f"Octilinear {'geographic' if geographic else 'nongeographic topological'} draft · visual review required",
+               "canvas": canvas, "style": {"label_size": 17, "secondary_size": 12, "route_width": 7, "corner_radius": 18, "interchange_radius": 16},
                "stations": [{"id": s["id"], "name": s["name"], "point": positions[s["id"]], "label": labels[s["id"]],
                              **({"secondary_name": s["secondary_name"]} if s.get("secondary_name") else {})} for s in stations],
                "routes": drawing_routes, "legend": {"point": [width - 280, 110], "width": 250, "title": "Lines"},
@@ -416,10 +418,10 @@ def layout(topology, overrides=None):
     report = {"status": "draft_needs_visual_review", "method": method, "geographic": geographic,
               "station_count": len(stations), "route_count": len(routes), "pattern_segments": pattern_map,
               "fallback_colors": fallback_colors, "automatically_shifted_stations": shifted,
-              "density_adjustments": spread, "offset_shared_segments": offset_count,
+              "schematic": schematic_report, "lane_layout": lane_report, "density_adjustments": [], "offset_shared_segments": offset_count,
               "near_stations": near_stations, "estimated_label_conflicts": label_conflicts,
               "estimated_label_station_conflicts": station_label_conflicts,
-              "estimated_label_route_conflicts": route_label_conflicts, "labels_outside_plot": outside_labels,
+              "estimated_label_route_conflicts": route_label_conflicts, "ambiguous_labels": ambiguous_labels, "labels_outside_plot": outside_labels,
               "stations_outside_canvas": [sid for sid, p in positions.items() if not (0 <= p[0] <= width and 0 <= p[1] <= height)],
               "shared_edges": shared_edges, "warnings": warnings}
     return network, report
